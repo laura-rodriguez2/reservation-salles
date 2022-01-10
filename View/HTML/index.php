@@ -1,5 +1,5 @@
 <?php 
-require('reversation-salles/Model/bdd.php');
+require('.../Model/bdd.php'); //ne vas pas jusqu'a model reste dans view 
 ?>
 <!DOCTYPE html>
 <html>
