@@ -12,11 +12,15 @@ require('../../Model/bdd.php');
 </head>
 
 <body>
-    <header>
-        <?php
-        require_once('header_footer/header.php');
-        ?>
-    </header>
+    <footer>
+        <nav>   
+            <ul class="lr_nav_footer">
+                <li><a class="lr_li_footer" href=""> Contact</a></li>
+                <li><a class="lr_li_footer" href="">Mentions Légales</a></li>
+                <li><a class="lr_li_footer" href=""> F.A.Q</a></li>
+            </ul>
+        </nav>
+    </footer>
 
 </html>
 </body>
