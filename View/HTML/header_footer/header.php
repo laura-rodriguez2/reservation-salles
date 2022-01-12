@@ -13,17 +13,17 @@ require('../../Model/bdd.php');
 
 <body>
     <header>
-    <nav>   
-        <div class="lr_nav_header">
-            <img src="../MEDIAS/vr_universe.png">
-        </div> 
-        <ul class="lr_nav_header">
-            <li><a class="lr_li_header" href="index.php"> Accueil</a></li>
-            <li><a class="lr_li_header" href="planning.php">Planning</a></li>
-            <li><a class="lr_li_header" href="inscription.php"> Inscription</a></li>
-            <li><a class="lr_li_header" href="connexion.php"> Connexion</a></li> 
-        </ul>
-    </nav>
+        <nav>   
+            <div class="lr_nav_header">
+                <img src="../MEDIAS/vr_universe.png" width="20%">
+            </div> 
+            <ul class="lr_nav_header">
+                <li><a class="lr_li_header" href="index.php"> Accueil</a></li>
+                <li><a class="lr_li_header" href="planning.php">Planning</a></li>
+                <li><a class="lr_li_header" href="inscription.php"> Inscription</a></li>
+                <li><a class="lr_li_header" href="connexion.php"> Connexion</a></li> 
+            </ul>
+        </nav>
     </header>
 
 </html>

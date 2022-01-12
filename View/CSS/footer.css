@@ -1,0 +1,31 @@
+.lr_nav_footer{
+    position:absolute;
+    bottom: 0;
+    margin: 0;
+    width: 100%;
+    padding: 1%;
+    background-color: rgb(24, 24, 24);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    font-size: 150%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.lr_li_footer{
+    text-decoration: none; 
+    color: #fff;
+    text-shadow:
+        0 0 7px rgb(255, 0, 0),
+        0 0 10px rgb(255, 0,0),
+        0 0 21px rgb(255, 0, 0),
+        0 0 42px rgb(255, 0, 0),
+        0 0 82px #0fa,
+        0 0 92px #0fa,
+        0 0 102px #0fa,
+        0 0 151px #0fa;
+}
+.lr_li_footer:hover{
+color: rgb(255, 91, 50);
+}
