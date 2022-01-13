@@ -6,10 +6,11 @@ private $id;
 public $login;
 public $password;
 
-    public function __construct($login, $password) {
+    public function __construct($login, $password, $password2 = NULL) {
         $this->login = $login;
         $this->password = $password;
         $this->password2 = $password2;
+        $this->bdd = $this->getBdd();
     }
     
 public function getBdd ()
@@ -38,8 +39,8 @@ public function register($login, $password){
     $checklogin = $this->checklogin();
 
     if ($checklogin == FALSE) {
-    if (strlen($this->login) > 60) {
-        echo "L'identifiant doit faire moins de 60 caractères";
+    if (strlen($this->login) > 50) {
+        echo "L'identifiant doit faire moins de 50 caractères";
     }
 
     elseif ($this->password !== $this->password2) {
@@ -49,40 +50,9 @@ public function register($login, $password){
 $hash = password_hash($this->password, PASSWORD_DEFAULT);
 $bdd = $this->getBdd();
 $requete_register = $bdd->prepare("INSERT INTO  utilisateurs (login, password) VALUES(?, ?)");
-$requete_register->execute([
-    'login' => $this->login,
-    'password' => $hash]);
+$requete_register->execute(['login' => $this-> login , 'password' => $hash]);
 return [$this->login, $hash]; 
 }
-
-public function connect($login, $password){
-    
-}
-
-public function disconnect(){
-    session_unset();
-    session_destroy();
-    $this->id = null;
-    $this->login= null;
-    $this->password= null;
-}
-public function update($login, $password){
-    
-}
-
-// C'est une fonction qui permet de verif si l'user est co **
-public function isConnected(){
-    if (isset($this->login)) {
-      return true;
-    }
-    else
-    {
-      return false;
-    }
-}
-public function getAllInfos(){
-    $info = array($this->id , $this->login);
-    return $info;
 }
 }
-?>
+}

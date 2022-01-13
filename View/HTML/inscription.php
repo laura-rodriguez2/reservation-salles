@@ -1,5 +1,6 @@
 <?php
 require('../../Model/bdd.php');
+require('../../Model/utilisateurs.php');
 if (isset($_POST['submit'])){
     if (isset($_POST['login']) AND isset($_POST['password']) AND isset($_POST['password2'])) {
 
