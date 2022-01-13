@@ -1,4 +1,20 @@
 main{
-    background-color: grey;
-    height: 30em;
+    background-image: url(../MEDIAS/triangle.jpg);
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position-x: center;
+}
+.al-scroll_snap{
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+}
+.al_bloc{
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 5px solid rgb(0, 0, 0);
+    height: 100vh;
+    scroll-snap-align: center;
 }
