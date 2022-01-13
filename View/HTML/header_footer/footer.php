@@ -13,7 +13,7 @@ require('../../Model/bdd.php');
 
 <body>
     <footer>
-        <nav>   
+        <nav>  
             <ul class="lr_nav_footer">
                 <li><a class="lr_li_footer" href=""> Contact</a></li>
                 <li><a class="lr_li_footer" href="">Mentions Légales</a></li>
