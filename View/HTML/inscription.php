@@ -1,17 +1,19 @@
 <?php
 require('../../Model/bdd.php');
+require('../../Model/utilisateurs.php');
 if (isset($_POST['submit'])){
-    $erreur = "";  
-    $login = htmlspecialchars($_POST['login']);
-    $password = htmlspecialchars($_POST['password']);
+    $user = new Utilisateurs();
+    $$erreur = $user->register($_POST['login'], $_POST['password'], $_POST['submit']);
+    }
+    else {
+        $$erreur = array();
+    }
 
-if (!empty($_POST['login']) AND !empty($_POST['email']) AND !empty($_POST['password'])){
+if (!empty($_POST['login']) AND !empty($_POST['password'])){
     $loginlenght = strlen($login);  //Permet de calculer la longueur du login
-    $requete=$bdd->prepare("SELECT * FROM utilisateurs WHERE login = ? "); 
-    $requete->execute(array($login));
+    $requete=$bdd->prepare(register($login)); 
+    $requete->execute(register($login));
     $loginexist= $requete->rowCount();
-    ($requete);
-    $id_droits= 1;
 
     if ($loginlenght > 255)
     $erreur= "Votre pseudo ne doit pas depasser 255 caractères !";        
@@ -20,14 +22,13 @@ if (!empty($_POST['login']) AND !empty($_POST['email']) AND !empty($_POST['passw
     if($erreur == ""){
         $hashage = password_hash($password, PASSWORD_BCRYPT);
         $insertmbr=$bdd->prepare(register($login));
-        $insertmbr->execute(
+        $insertmbr->execute(register($login));
         $erreur = "Votre compte à bien été créer !";
     }
 }
     else{
         $erreur="Tout les champs doivent être remplis !";
     }
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,9 +51,7 @@ if (!empty($_POST['login']) AND !empty($_POST['email']) AND !empty($_POST['passw
                 <form id="form_inscription" action="" method="POST">
                     <h1 class="lr_h2">S'inscrire</h1>
                         <input type="text" class="box-input" name="login" placeholder="Login" required />
-                        <input type="email" class="box-input" name="email" placeholder="email" required />
                         <input type="password" class="box-input" name="password" placeholder="Mot de passe" required />
-                        <input type="password" class="box-input" name="password2" placeholder="Confirmez votre mot de passe" required />
                         <input type="submit" name="submit" value="S'inscrire" class="btn btn-secondary btn-lg" /> 
                         <p class="lr_h2">Déjà inscrit? <a id="color_link" href="connexion.php">Connectez-vous ici</a></p> 
                 </form>
