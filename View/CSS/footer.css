@@ -1,7 +1,7 @@
 .lr_nav_footer{
-    position:absolute;
-    bottom: 0;
-    margin: 0;
+    /* position:absolute;
+    /* bottom: 0;  */
+    margin: 0; 
     width: 100%;
     padding: 2%;
     background-color: rgb(24, 24, 24);
