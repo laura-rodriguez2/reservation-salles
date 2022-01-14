@@ -22,14 +22,29 @@
         </nav>
 
         <?php 
-            require '../../Model/month.php';
-            try{
-                $month = new Month(month:$_GET['month'] ?? null, year:$_GET['year'] ?? null);
-            } catch(\Exception $e) {
-                $month = new Month();
-            }
+            require '../../Model/Month.php';
+            $month = new Month(month:$_GET['month'] ?? null, year: $_GET['year'] ?? null);
+            $start = $month->getFirstDay()->modify(modifier:'last monday'); 
         ?>
+
+
         <h1><?= $month->toString(); ?></h1>
+
+
+        <table class="calendar__table calendar__table--<?= $month->getWeeks(); ?> weeks">
+            <?php for ($i = 0; $i < $month->getWeeks(); $i++){ ?>
+            <tr>
+                <?php foreach($month->days as $k => $day){ ?>
+                <td>
+                    <?php if ($i === 0){ ?>
+                        <div class="calendar__weekday"><?= $day; ?></div>
+                    <?php }?>
+                        <div class="calendar__day"><?= (clone $start)->modify( modifier:"+" . ($k + $i * 7) . "days")->format(format:'d'); ?></div>
+                </td>
+                <?php } ?>
+            </tr>
+            <?php } ?>
+        </table>
     </main>
     <footer>
         <?php

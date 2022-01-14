@@ -26,12 +26,31 @@ class Month{
         $this->month = $month;
         $this->year = $year;
     }
+
+    /**
+     * Renvoie 1er jour du mois
+     * @return \DateTime
+     */
+    public function getFirstDay (): \DateTime {
+        return new \DateTime( datetime:"{$this->year}-{$this->month}-01");
+    }
+
     /**
      * Retourne le mois en toute lettre (ex: Janvier 2021)
      * @return string
      */
     public function toString(): string {
         return $this->months[$this->month - 1] .''. $this->year;
+    }
+
+    public function getWeeks (): int {
+        $start = $this->getFirstDay();
+        $end = (clone $start)->modify(modifier:'+1 month -1day');
+        $weeks = intval($end->format(format:'W')) - intval($start->format(format:'W')) + 1;
+        if ($weeks < 0) {
+            $weeks = intval($end->format(format:'W'));
+        }
+        return $weeks;
     }
 }
 ?>
