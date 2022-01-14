@@ -64,7 +64,6 @@ if($password == $resultat['password']){
         $this->id = $resultat['id'];
         $this->login= $resultat['login'];
 }
-
     $info = array($this->id , $this->login, $this->email, $this->firstname, $this->lastname);
     return $info;
 }
