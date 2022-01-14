@@ -50,8 +50,7 @@ public function register($login, $password){
 $hash = password_hash($this->password, PASSWORD_DEFAULT);
 $bdd = $this->getBdd();
 $requete_register = $bdd->prepare("INSERT INTO  utilisateurs (login, password) VALUES(?, ?)");
-$requete_register->execute(['login' => $this-> login , 'password' => $hash]);
-return [$this->login, $hash]; 
+$requete_register->execute(array($login,$password)); 
 }
 }
 }
