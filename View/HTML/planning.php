@@ -24,17 +24,17 @@
         <?php 
             require '../../Model/Month.php';
             $month = new Month(month:$_GET['month'] ?? null, year: $_GET['year'] ?? null);
-            $start = $month->getFirstDay()->modify(modifier:'last monday'); 
+            $start = $month->getFirstDay();
+            $start = $start->format(format: 'N') === '1' ? $start : $month->getFirstDay()->modify(modifier:'last monday'); 
         ?>
 
-        <div class="d-flex">
+        <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
         <h1><?= $month->toString(); ?></h1>
         <div>
-            <a href="#" class="btn btn-primary">&lt;</a>
-            <a href="#" class="btn btn-primary">&gt;</a>
+            <a href="planning.php?month=<?= $month->previousMonth()->month; ?>&year=<?= $month->previousMonth()->year;?>" class="btn btn-primary">&lt;</a>
+            <a href="planning.php?month=<?= $month->nextMonth()->month; ?>&year=<?= $month->nextMonth()->year;?>" class="btn btn-primary">&gt;</a>
         </div>
         </div>
-
 
         <table class="calendar__table calendar__table--<?= $month->getWeeks(); ?> weeks">
             <?php for ($i = 0; $i < $month->getWeeks(); $i++){ ?>

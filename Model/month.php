@@ -4,8 +4,8 @@ class Month{
     
     private $months = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Décembre'];
     
-    private $month;
-    private $year;
+    public $month;
+    public $year;
     /**
      * Month constructor
      * @param int $month Le mois compris entre 1 et 12
@@ -64,5 +64,34 @@ class Month{
     public function withinMonth (\DateTime $date): bool {
         return $this->getFirstDay()->format( format: 'Y-m') === $date->format( format: 'Y-m');
     }
+
+    /**
+     * Renvoie le mois suivant
+     * @return Month
+     */
+    public function nextMonth(): Month {
+        $month = $this->month + 1;
+        $year = $this->year;
+        if($month > 12){
+            $month = 1;
+            $year += 1;
+        }
+        return new Month($month, $year);
+    }
+
+    /**
+     * Renvoie le mois précédent
+     * @return Month
+     */
+    public function previousMonth(): Month {
+        $month = $this->month - 1;
+        $year = $this->year;
+        if($month < 1){
+            $month = 12;
+            $year -= 1;
+        }
+        return new Month($month, $year);
+    }
+    
 }
 ?>
