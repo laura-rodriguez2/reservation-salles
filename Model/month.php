@@ -1,6 +1,9 @@
 <?php 
 class Month{
+    public $days = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
+    
     private $months = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Décembre'];
+    
     private $month;
     private $year;
     /**
@@ -32,7 +35,7 @@ class Month{
      * @return \DateTime
      */
     public function getFirstDay (): \DateTime {
-        return new \DateTime( datetime:"{$this->year}-{$this->month}-01");
+        return new \DateTime(datetime:"{$this->year}-{$this->month}-01");
     }
 
     /**
@@ -45,12 +48,21 @@ class Month{
 
     public function getWeeks (): int {
         $start = $this->getFirstDay();
-        $end = (clone $start)->modify(modifier:'+1 month -1day');
+        $end = (clone $start)->modify(modifier:'+1 month -1 day');
         $weeks = intval($end->format(format:'W')) - intval($start->format(format:'W')) + 1;
         if ($weeks < 0) {
             $weeks = intval($end->format(format:'W'));
         }
         return $weeks;
+    }
+
+    /**
+     * Est-ce que le jour est dans le mois en cours
+     * @param \DateTime $date
+     * @return bool
+     */
+    public function withinMonth (\DateTime $date): bool {
+        return $this->getFirstDay()->format( format: 'Y-m') === $date->format( format: 'Y-m');
     }
 }
 ?>

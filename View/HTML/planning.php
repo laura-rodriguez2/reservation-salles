@@ -27,19 +27,27 @@
             $start = $month->getFirstDay()->modify(modifier:'last monday'); 
         ?>
 
-
+        <div class="d-flex">
         <h1><?= $month->toString(); ?></h1>
+        <div>
+            <a href="#" class="btn btn-primary">&lt;</a>
+            <a href="#" class="btn btn-primary">&gt;</a>
+        </div>
+        </div>
 
 
         <table class="calendar__table calendar__table--<?= $month->getWeeks(); ?> weeks">
             <?php for ($i = 0; $i < $month->getWeeks(); $i++){ ?>
             <tr>
-                <?php foreach($month->days as $k => $day){ ?>
-                <td>
+                <?php 
+                foreach($month->days as $k => $day){ 
+                    $date = (clone $start)->modify( modifier:"+" . ($k + $i * 7) . "days")
+                ?>
+                <td class="<?= $month->withinMonth($date) ? '' : 'calendar__othermonth'; ?>">
                     <?php if ($i === 0){ ?>
                         <div class="calendar__weekday"><?= $day; ?></div>
                     <?php }?>
-                        <div class="calendar__day"><?= (clone $start)->modify( modifier:"+" . ($k + $i * 7) . "days")->format(format:'d'); ?></div>
+                        <div class="calendar__day"><?= $date->format(format:'d'); ?></div>
                 </td>
                 <?php } ?>
             </tr>
