@@ -3,7 +3,6 @@ require('../../Model/bdd.php');
 require('../../Model/utilisateurs.php');
 if (isset($_POST['submit'])){
     if (isset($_POST['login']) AND isset($_POST['password']) AND isset($_POST['password2'])) {
-
         $login = htmlspecialchars($_POST['login']);
         $password = htmlspecialchars($_POST['password']);
         $password2 = htmlspecialchars($_POST['password2']);
