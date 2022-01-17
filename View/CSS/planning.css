@@ -1,161 +1,28 @@
-#planning_body{
-	background-color: #58331D;
-	margin: 0;
-	padding: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+.calendar__table{
+    width: 100%;
+    height: calc(100vh - 128px);
+}
+.calendar__table td {
+    padding: 10px;
+    border: 1px solid #CCC;
+    vertical-align: top;
+    width: 15%;
+    height: 20%;
 }
 
-#planning_header{
-	background-color: blue;
-	/* height: 16.7vh;
-	margin-bottom: 0.5vh; */
-
-}
-#planning_main {
-	/* min-height: 90vh;
-	width: 100%; */
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	background: #D69664; /* fallback color if gradients are not supported*/ 
-	background: -webkit-linear-gradient(180deg,rgba(214,150,100,0.8) 35%, rgba(207,196,185,0.6), rgba(88,50,29,0.8));
-	background: -moz-linear-gradient(180deg,rgba(214,150,100,0.8) 35%, rgba(207,196,185,0.6), rgba(88,50,29,0.8));
-	background: -o-linear-gradient(180deg,rgba(214,150,100,0.8) 35%, rgba(207,196,185,0.6), rgba(88,50,29,0.8));
-	background: linear-gradient(180deg,rgba(214,150,100,0.8) 35%, rgba(207,196,185,0.6), rgba(88,50,29,0.8));
-}
-#planning_container_titre{
-	background-color: #9C6B47;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	min-height: 8vh;
-}
-#planning_container_titre_h1{
-	background-color: rgba(223, 200, 183, 0.8);
-	height: 60%;
-	width: 20vw;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	text-align: center;
-	font-family: 'Harmattan', sans-serif;
-	font-size: 2.5vh;
+.calendar__table--6weeks td {
+    height: 16%;
 }
 
-#planning_container_titre_h1 h1{
-	margin-bottom: 6.5%;
-}
-.planning_container_table{
-	overflow: auto;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: 2%;
+.calendar__weekday {
+    font-weight: bold;
+    color: #000;
+    font-size: 1.2em;
 }
 
-table
-    {
-        display: flex;
-        flex-direction: column;
-        border: 1px solid black;
-        height: 90%;
-        width: 70vw;
-        margin-bottom: 10vh;
-        border-spacing: 0;
-        box-shadow: 2px 2px 10px #221510;
-    }
-
-thead
-    {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        height: 10%;
-        justify-content: space-around;
-        align-items: center;
-    }
-
-thead tr
-    {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        width: 100%;
-        border-bottom: 1px solid black;
-    }
-thead th
-    {
-        border-left: 1px solid black;
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        justify-content: space-around;
-        align-items: center;
-    }
-tbody tr
-    {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        width: 100%;
-        border-bottom: 1px solid #000000;
-    }
-
-td
-    {
-		background-color: rgba(197, 194, 194, 0.5);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        flex-grow: 1;
-        width: 60vw;
-        border-left: 1px solid black;
-    }
-td p
-    {
-        margin: 0;
-    }
-.heure
-    {
-        width: 15vw;
-        background-color: rgba(255, 255, 255, 0.5);
-        font-weight: bold;
-    }
-.case
-    {
-        width: 35vw;
-        height: 15vh;
-        /* border-radius: 10%; */
-        /* border-color: aqua; */
-    }
-.resa
-    {
-        width: 35vw;
-        height: 15vh;
-        background-color: rgba(255, 255, 255, 0.5);
-    }
-.resa a
-    {
-        color: #923e02;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-.resa a:hover
-    {
-        color: #572104;
-        text-decoration: none;
-    }
-.vide
-    {
-        width: 30vw;
-        background-color: rgba(255, 255, 255, 0.5);
-    }
-.jour
-    {
-        background-color: #ededd5;
-    }
+.calendar__day {
+    font-size: 1.3em;
+}
+.calendar__othermonth .calendar__day {
+    opacity: 0.3;
+}

@@ -1,16 +1,15 @@
 <?php
+
 // require('../../Model/bdd.php');
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href='../CSS/planning.css' />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Planning</title>
 </head>
-
 <body>
     <header>
         <?php
@@ -18,95 +17,42 @@
         ?>
     </header>
     <main>
-        <div class="planning_container_table">
-            <table>
-                <thead>
-                    <tr>
-                        <th class="vide"></th>
-                        <th class="jour">Lun.<br> <?php echo $jour_semaine = date('d/m', strtotime('monday this week'));?></th>
-                        <th class="jour">Mar.<br> <?php echo $jour_semaine = date('d/m', strtotime('tuesday this week'));?></th>
-                        <th class="jour">Mer.<br> <?php echo $jour_semaine = date('d/m', strtotime('wednesday this week'));?></th>
-                        <th class="jour">Jeu.<br> <?php echo $jour_semaine = date('d/m', strtotime('thursday this week'));?></th>
-                        <th class="jour">Ven.<br> <?php echo $jour_semaine = date('d/m', strtotime('friday this week'));?></th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php
-                    include('../../Model/bdd.php');
-                    // require_once('../../Model/reservations');
+        <nav class="navbar navbar-dark bg-primary mb-3">
+            <a href="" class="navbar-brand"> Planning </a>
+        </nav>
 
-                    // $dbco = connectPdo();
-                    $requete_resa = $bdd->prepare("SELECT * FROM utilisateurs INNER JOIN reservations ON utilisateurs.id = reservations.id_utilisateur WHERE week(debut) = week(curdate())");
-                    $requete_resa->execute();
-                    $info_reservation = $requete_resa->fetchAll();
+        <?php 
+            require '../../Model/Month.php';
+            $month = new Month(month:$_GET['month'] ?? null, year: $_GET['year'] ?? null);
+            $start = $month->getFirstDay();
+            $start = $start->format(format: 'N') === '1' ? $start : $month->getFirstDay()->modify(modifier:'last monday'); 
+        ?>
 
-                    /*var_dump($info_reservation);*/
-                            //On créer les heures
-                    for($heure = 8; $heure <= 19; $heure++)
-                    {
-                        ?>
-                        <tr>
-                            <td class="heure"><p><?php echo $heure . "h";?></p></td>
-                            <?php
-                            //génération des cellules
-                            for($jour = 1; $jour<=5; $jour++) {
-                                //si on à des réservations,
-                                if(!empty($info_reservation))
-                                {
-                                    foreach($info_reservation as $resa => $Hresa) { //sépare les réservations
-                                        $JH = explode(" ", $Hresa["debut"]);//sélection la ligne correspondant à l'heure de début
-
-                                        $H = explode(":", $JH[1]);//explose l'heure
-                                        $heure_resa = date("G", mktime($H[0], $H[1], $H[2], 0, 0, 0));//récupère uniquement l'heure sans le 0
-
-                                        $J = explode("-", $JH[0]);//explose la date
-                                        $jour_resa = date("N", mktime(0, 0, 0, $J[1], $J[2], $J[0]));//récupère le numéro du jour
-
-                                        $case_resa = $heure_resa . $jour_resa;//crée un numéro de réservation
-
-                                        $titre = $Hresa["titre"];
-                                        $login = $Hresa["login"];
-                                        $id = $Hresa["id"];
-
-                                        /* var_dump($titre);
-                                        var_dump($id);*/
-
-                                        //Crée un numéro pour chaque cellules
-                                        $case = $heure . $jour;
-
-                                        if($case == $case_resa) {
-                                            ?>
-                                            <td class="resa"><a href="reservation.php?evenement=<?php echo $id;?>"><p><?php echo $titre;?></p><p><?php echo $login;?></p></a></td>
-                                            <?php
-                                            break;
-                                        }
-                                        else
-                                        {
-                                            $case = null;
-                                        }
-                                    }
-                                    if ($case == null)
-                                    {
-                                        ?>
-                                        <td class="case"><a href="reservation-form.php?heure_debut=<?php echo $heure;?>&amp;date_debut=<?php echo $jour;?>">Réserver un créneau</a></td>
-                                        <?php
-                                    }
-                                }
-                                else //si la case n'est pas réservé
-                                    {
-                                        ?>
-                                        <td class="case"><a href="reservation-form.php?heure_debut=<?php echo $heure;?>&amp;date_debut=<?php echo $jour;?>">Réserver un créneau</a></td>
-                                        <?php
-                                    }
-                            }
-                            ?>
-                        </tr>
-                        <?php
-                    }
-                ?>
-                </tbody>
-            </table>
+        <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
+        <h1><?= $month->toString(); ?></h1>
+        <div>
+            <a href="planning.php?month=<?= $month->previousMonth()->month; ?>&year=<?= $month->previousMonth()->year;?>" class="btn btn-primary">&lt;</a>
+            <a href="planning.php?month=<?= $month->nextMonth()->month; ?>&year=<?= $month->nextMonth()->year;?>" class="btn btn-primary">&gt;</a>
         </div>
+        </div>
+
+        <table class="calendar__table calendar__table--<?= $month->getWeeks(); ?> weeks">
+            <?php for ($i = 0; $i < $month->getWeeks(); $i++){ ?>
+            <tr>
+                <?php 
+                foreach($month->days as $k => $day){ 
+                    $date = (clone $start)->modify( modifier:"+" . ($k + $i * 7) . "days")
+                ?>
+                <td class="<?= $month->withinMonth($date) ? '' : 'calendar__othermonth'; ?>">
+                    <?php if ($i === 0){ ?>
+                        <div class="calendar__weekday"><?= $day; ?></div>
+                    <?php }?>
+                        <div class="calendar__day"><?= $date->format(format:'d'); ?></div>
+                </td>
+                <?php } ?>
+            </tr>
+            <?php } ?>
+        </table>
     </main>
     <footer>
         <?php
