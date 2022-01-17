@@ -56,7 +56,7 @@ $requete_register->execute(array($login,$password));
 }
 public function connect($login, $password){
 session_start();
-$requete_co = $connexion->query("SELECT * FROM utilisateurs WHERE login = '$login'");
+$requete_co = $resultat->query("SELECT * FROM utilisateurs WHERE login = ?");
 $resultat = $requete_co ->fetch();
 if($password == $resultat['password']){
         $_SESSION['login'] = $login;
@@ -64,7 +64,7 @@ if($password == $resultat['password']){
         $this->id = $resultat['id'];
         $this->login= $resultat['login'];
 }
-    $info = array($this->id , $this->login, $this->email, $this->firstname, $this->lastname);
+    $info = array($this->id , $this->login);
     return $info;
 }
 }
