@@ -23,9 +23,15 @@
 
         <?php 
             require '../../Model/Month.php';
+            require '../../Model/events.php';
+            $events = new Events();
             $month = new Month(month:$_GET['month'] ?? null, year: $_GET['year'] ?? null);
             $start = $month->getFirstDay();
             $start = $start->format(format: 'N') === '1' ? $start : $month->getFirstDay()->modify(modifier:'last monday'); 
+            $weeks = $month->getWeeks();
+            $end = (clone $start)->modify(modifier: '+' . (6 + 7 * $weeks - 1) . 'days');
+            $events = $events->getEventsBetweenByDay($start, $end);
+            var_dump($events); //probleme : le var_dump affiche un array(0)
         ?>
 
         <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
@@ -36,8 +42,8 @@
         </div>
         </div>
 
-        <table class="calendar__table calendar__table--<?= $month->getWeeks(); ?> weeks">
-            <?php for ($i = 0; $i < $month->getWeeks(); $i++){ ?>
+        <table class="calendar__table calendar__table--<?= $weeks; ?> weeks">
+            <?php for ($i = 0; $i < $weeks; $i++){ ?>
             <tr>
                 <?php 
                 foreach($month->days as $k => $day){ 
