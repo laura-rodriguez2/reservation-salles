@@ -1,6 +1,5 @@
 <?php
-
-// require('../../Model/bdd.php');
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,8 +21,8 @@
         </nav>
 
         <?php 
-            require '../../Model/Month.php';
-            require '../../Model/events.php';
+            require '../../Model/Month.php'; //Contient les fonctions pour faire le calendrier
+            require '../../Model/events.php'; //Contient les fonctions permettant d'afficher les évènements
             $events = new Events();
             $month = new Month(month:$_GET['month'] ?? null, year: $_GET['year'] ?? null);
             $start = $month->getFirstDay();
@@ -31,7 +30,6 @@
             $weeks = $month->getWeeks();
             $end = (clone $start)->modify(modifier: '+' . (6 + 7 * $weeks - 1) . 'days');
             $events = $events->getEventsBetweenByDay($start, $end);
-            var_dump($events); //probleme : le var_dump affiche un array(0)
         ?>
 
         <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
@@ -47,13 +45,19 @@
             <tr>
                 <?php 
                 foreach($month->days as $k => $day){ 
-                    $date = (clone $start)->modify( modifier:"+" . ($k + $i * 7) . "days")
+                    $date = (clone $start)->modify( modifier:"+" . ($k + $i * 7) . "days");
+                    $eventsForDay = $events[$date->format(format:'Y-m-d')] ?? [];
                 ?>
                 <td class="<?= $month->withinMonth($date) ? '' : 'calendar__othermonth'; ?>">
                     <?php if ($i === 0){ ?>
                         <div class="calendar__weekday"><?= $day; ?></div>
                     <?php }?>
                         <div class="calendar__day"><?= $date->format(format:'d'); ?></div>
+                    <?php foreach($eventsForDay as $event){ ?> 
+                        <div class="calendar__event">
+                            <?= (new DateTime( $event['debut']))->format(format:'H:i') ?> - <a href="./reservation.php?id=<?= $event['id'];?>"><?= $event['titre'];?></a>
+                        </div>
+                    <?php } ?>
                 </td>
                 <?php } ?>
             </tr>
