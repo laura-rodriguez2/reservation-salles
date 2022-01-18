@@ -2,6 +2,7 @@
 require('../../Model/bdd.php');
 require('../../Model/utilisateurs.php');
 if(isset($_POST['formconnexion'])){
+<<<<<<< HEAD
     if(isset($_POST['login']) AND isset($_POST['password']){
         $login = htmlspecialchars($_POST['login']);
         $password =htmlspecialchars($_POST['password']);
@@ -11,6 +12,17 @@ if(isset($_POST['formconnexion'])){
         echo "Je suis connect";
     }
 }
+=======
+    if(isset($_POST['loginconnect']) AND isset($_POST['passwordconnect'])){
+        $login = htmlspecialchars($_POST['loginconnect']);
+        $password = htmlspecialchars($_POST['passwordconnect']);
+        $user = new User($login, $password);
+        $user_co = $user->connect($login, $password);
+        $_SESSION['user'] = $user_co;
+    }
+}
+
+>>>>>>> master
 ?>
 <!DOCTYPE html>
 <html>

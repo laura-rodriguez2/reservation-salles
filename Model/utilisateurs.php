@@ -27,34 +27,36 @@ public function getLogin(){
     return $this->login;
 }
 
-public function checklogin() {
-
+public function checklogin($login) {
     $requete_same_login = $this->bdd->prepare("SELECT * FROM utilisateurs WHERE login = ?");
-    $requete_same_login->execute([$this->login]);
+    $requete_same_login->execute([$login]);
     $loginExist = $requete_same_login->fetch();
     return $loginExist;
 }
 
 public function register($login, $password){
-    $checklogin = $this->checklogin();
-
+    $checklogin = $this->checklogin($login);
     if ($checklogin == FALSE) {
-    if (strlen($this->login) > 50) {
-        echo "L'identifiant doit faire moins de 50 caractères";
+        if (strlen($this->login) > 50) {
+            echo "L'identifiant doit faire moins de 50 caractères";
+        }
+        elseif ($this->password !== $this->password2) {
+            echo "Le mot de passe et la confirmation sont différents";
+        }
+        elseif ($this->password == $this->password2) {
+            $hash = password_hash($this->password, PASSWORD_DEFAULT);
+            $bdd = $this->getBdd();
+            $requete_register = $bdd->prepare("INSERT INTO  utilisateurs (login, password) VALUES(?, ?)");
+            $requete_register->execute(array($login,$hash)); 
+        }
     }
+    else{
+       echo "Login déjà pris.";
+    }
+}
 
-    elseif ($this->password !== $this->password2) {
-        echo "Le mot de passe et la confirmation sont différents";
-    }
-    elseif ($this->password == $this->password2) {
-$hash = password_hash($this->password, PASSWORD_DEFAULT);
-$bdd = $this->getBdd();
-$requete_register = $bdd->prepare("INSERT INTO  utilisateurs (login, password) VALUES(?, ?)");
-$requete_register->execute(array($login,$password)); 
-}
-}
-}
 public function connect($login, $password){
+<<<<<<< HEAD
 session_start();
 $requete_co = $resultat->query("SELECT * FROM utilisateurs WHERE login = ?");
 $resultat = $requete_co ->fetch();
@@ -66,5 +68,21 @@ if($password == $resultat['password']){
 }
     $info = array($this->id , $this->login);
     return $info;
+=======
+    $requete_co = $this->bdd->prepare("SELECT * FROM utilisateurs WHERE login = ?");
+    $requete_co->execute([$this->login]);
+    $user = $requete_co->fetch(); 
+    if ($user AND password_verify($this->password, $user['password'])) {
+        $this->id           = $user['id'];
+        $this->login        = $user['login'];
+        $this->password     = $user['password'];
+        $this->connect      = "1";      
+        echo "connecté !";
+        // return $tab = ['id' => $this->id, 'login' => $this->login, 'password' => $this->password, 'connect' => $this->connect];
+    } 
+    else {
+     echo "Mot de passe ou identifiant incorrect"; 
+    }
+>>>>>>> master
 }
 }
