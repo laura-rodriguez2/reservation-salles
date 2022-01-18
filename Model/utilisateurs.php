@@ -56,19 +56,6 @@ public function register($login, $password){
 }
 
 public function connect($login, $password){
-<<<<<<< HEAD
-session_start();
-$requete_co = $resultat->query("SELECT * FROM utilisateurs WHERE login = ?");
-$resultat = $requete_co ->fetch();
-if($password == $resultat['password']){
-        $_SESSION['login'] = $login;
-        $_SESSION['password'] = $password;
-        $this->id = $resultat['id'];
-        $this->login= $resultat['login'];
-}
-    $info = array($this->id , $this->login);
-    return $info;
-=======
     $requete_co = $this->bdd->prepare("SELECT * FROM utilisateurs WHERE login = ?");
     $requete_co->execute([$this->login]);
     $user = $requete_co->fetch(); 
@@ -83,6 +70,5 @@ if($password == $resultat['password']){
     else {
      echo "Mot de passe ou identifiant incorrect"; 
     }
->>>>>>> master
 }
 }
