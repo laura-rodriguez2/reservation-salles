@@ -8,7 +8,7 @@
         <title>Index</title>
     </head>
     <body>
-        <header>
+        <header id="al_header">
             <?php 
                 require_once("header_footer/header.php")
             ?>

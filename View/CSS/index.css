@@ -1,10 +1,15 @@
+#al_header{
+position: fixed;
+width: 100%;
+}
 main{
-    background-image: url(../MEDIAS/triangle.jpg);
-    background-repeat: no-repeat;
+    background-image: url(../MEDIAS/fond_neon.jpg);
+    background-repeat: no-repeat;   
     background-size:cover;
     background-position-x: center;
+    background-attachment: fixed;
 }
-.al-scroll_snap{
+.al_scroll-snap{
     height: 100vh;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
@@ -17,4 +22,12 @@ main{
     border-bottom: 5px solid rgb(0, 0, 0);
     height: 100vh;
     scroll-snap-align: center;
+}
+::-webkit-scrollbar{
+    width: 0px;
+    height: 0px;
+}
+footer{
+    position: fixed;
+    width: 100%;
 }

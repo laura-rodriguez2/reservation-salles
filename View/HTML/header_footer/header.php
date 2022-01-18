@@ -19,10 +19,10 @@ require('../../Model/bdd.php');
         ?>
         <nav>   
             <ul class="lr_nav_header">
-                <img src="../MEDIAS/vr_universe.png" width="20%">
-                <li><a class="lr_li_header" href="index.php"> Accueil</a></li>
-                <li><a class="lr_li_header" href="planning.php"> Planning</a></li>
-                <li><a class="lr_li_header" href="inscription.php"> Réservation</a></li>
+                <img src="../MEDIAS/vr_universe.png" width="20%">$emsp
+                <li><a class="lr_li_header" href="index.php"> Accueil</a></li> $emsp
+                <li><a class="lr_li_header" href="planning.php"> Planning</a></li> $emsp
+                <li><a class="lr_li_header" href="inscription.php"> Réservation</a></li>$emsp
                 <li><a class="lr_li_header" href="connexion.php"> Déconnexion</a></li> 
             </ul>
         </nav>
