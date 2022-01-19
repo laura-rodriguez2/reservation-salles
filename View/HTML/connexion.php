@@ -8,6 +8,7 @@ if(isset($_POST['formconnexion'])){
         $user = new User($login, $password);
         $user_co = $user->connect($login, $password);
         $_SESSION['user'] = $user_co;
+        header('location: profil.php');
     }
 }
 
