@@ -48,6 +48,7 @@ public function register($login, $password){
             $bdd = $this->getBdd();
             $requete_register = $bdd->prepare("INSERT INTO  utilisateurs (login, password) VALUES(?, ?)");
             $requete_register->execute(array($login,$hash)); 
+            header('location: connexion.php');
         }
     }
     else{
