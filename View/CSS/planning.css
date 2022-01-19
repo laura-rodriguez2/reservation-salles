@@ -1,5 +1,9 @@
+body {
+        background-image: url(../MEDIAS/triangle.jpg);
+
+}
+
 main {
-    background-image: url(../MEDIAS/triangle.jpg);
     /* background-color: rgb(24, 24, 24); */
     /* background-blend-mode:overlay; */
 
