@@ -1,5 +1,5 @@
 #al_header{
-position: fixed;
+position: absolute;
 width: 100%;
 }
 main{
@@ -28,6 +28,8 @@ main{
     height: 0px;
 }
 footer{
-    position: fixed;
+    /* position: fixed; */
+    position:absolute;
+    bottom:0;
     width: 100%;
 }
