@@ -58,16 +58,17 @@ public function register($login, $password){
 
 public function connect($login, $password){
     $requete_connexion = $this->bdd->prepare("SELECT * FROM utilisateurs WHERE login = ?");
-    $requete_connexion->execute([$this->login]);
+    $requete_connexion->execute(array($this->login));
     $user = $requete_connexion->fetch(); 
 
-if ($login==$user['login'] && $password==$user['password']) {
+if ($login == $user['login'] && $password == $user['password']) {
     echo "Vous etes co !";
     $this->id           = $user['id'];
     $this->login        = $user['login'];
     $this->password     = $user['password'];
     $this->connect      = "1";      
     return ($this);
+    // header('location: profil.php');
 }
     else {
         echo "Mot de passe ou identifiant incorrect"; 
