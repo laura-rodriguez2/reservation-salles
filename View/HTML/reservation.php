@@ -18,8 +18,7 @@ require('../../Model/bdd.php');
         ?>
     </header>
     <main>
-<?php
-if
+
     </main>
     <footer>
         <?php

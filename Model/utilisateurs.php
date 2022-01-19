@@ -57,19 +57,43 @@ public function register($login, $password){
 }
 
 public function connect($login, $password){
-    $requete_co = $this->bdd->prepare("SELECT * FROM utilisateurs WHERE login = ?");
-    $requete_co->execute([$this->login]);
-    $user = $requete_co->fetch(); 
-    if ($user AND password_verify($this->password, $user['password'])) {
-        $this->id           = $user['id'];
-        $this->login        = $user['login'];
-        $this->password     = $user['password'];
-        $this->connect      = "1";      
-        echo "connecté !";
-        // return $tab = ['id' => $this->id, 'login' => $this->login, 'password' => $this->password, 'connect' => $this->connect];
-    } 
+    $requete_connexion = $this->bdd->prepare("SELECT * FROM utilisateurs WHERE login = ?");
+    $requete_connexion->execute(array($this->login));
+    $user = $requete_connexion->fetch(); 
+
+if ($login == $user['login'] && $password == $user['password']) {
+    echo "Vous etes co !";
+    $this->id           = $user['id'];
+    $this->login        = $user['login'];
+    $this->password     = $user['password'];
+    $this->connect      = "1";      
+    return ($this);
+    // header('location: profil.php');
+}
     else {
-     echo "Mot de passe ou identifiant incorrect"; 
+        echo "Mot de passe ou identifiant incorrect"; 
     }
 }
+
+public function disconnect(){
+    session_unset();
+    session_destroy();
+    $this->id = null;
+    $this->login= null;
 }
+
+public function update($login, $password){
+    $hash = password_hash($this->password, PASSWORD_DEFAULT);
+    $requete_update = $this->bdd->query("UPDATE utilisateurs SET login = '$login', password='$password' WHERE login = '$this->login'");
+    $requete_update->execute(array(
+            'id' => $this->id,
+            'login' => "Update",
+            'password' => $hash,
+        ));
+}
+public function delete() {
+    $requete_supp = $this->bdd->query("DELETE FROM utilisateurs WHERE login = '$this->login'");
+    $this->disconnect();
+}
+}
+?>
