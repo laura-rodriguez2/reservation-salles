@@ -74,7 +74,6 @@ if ($login == $user['login'] && $password == $user['password']) {
         echo "Mot de passe ou identifiant incorrect"; 
     }
 }
-<<<<<<< HEAD
 
 public function disconnect(){
     session_unset();
@@ -98,6 +97,3 @@ public function delete() {
 }
 }
 ?>
-=======
-}
->>>>>>> master
