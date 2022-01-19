@@ -39,13 +39,17 @@ class Month{
     }
 
     /**
-     * Retourne le mois en toute lettre (ex: Janvier 2021)
+     * Renvoie le mois en toute lettre (ex: Janvier 2021)
      * @return string
      */
     public function toString(): string {
         return $this->months[$this->month - 1] .''. $this->year;
     }
 
+    /** 
+     * 
+     * @param int $weeks
+     */
     public function getWeeks (): int {
         $start = $this->getFirstDay();
         $end = (clone $start)->modify(modifier:'+1 month -1 day');
