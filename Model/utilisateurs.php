@@ -57,19 +57,21 @@ public function register($login, $password){
 }
 
 public function connect($login, $password){
-    $requete_co = $this->bdd->query("SELECT * FROM utilisateurs WHERE login = '$login'");
-    $resultat2 = $requete_co ->fetch();
+    $requete_connexion = $this->bdd->prepare("SELECT * FROM utilisateurs WHERE login = ?");
+    $requete_connexion->execute([$this->login]);
+    $user = $requete_connexion->fetch(); 
 
-    if($password == $resultat2['password'])
-    {
-        $_SESSION['login'] = $login;
-        $_SESSION['password'] = $password;
-        $this->id = $resultat2['id'];
-        $this->login= $resultat2['login'];
+if ($login==$user['login'] && $password==$user['password']) {
+    echo "Vous etes co !";
+    $this->id           = $user['id'];
+    $this->login        = $user['login'];
+    $this->password     = $user['password'];
+    $this->connect      = "1";      
+    return ($this);
+}
+    else {
+        echo "Mot de passe ou identifiant incorrect"; 
     }
-
-    $info = array($this->id , $this->login);
-    return $info;
 }
 
 public function disconnect(){
