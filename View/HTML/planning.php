@@ -19,7 +19,7 @@
 
         <?php 
             require '../../Model/Month.php'; //Contient les fonctions pour faire le calendrier
-            require '../../Model/events.php'; //Contient les fonctions permettant d'afficher les évènements
+            require '../../Model/events.php'; //Contient les fonctions permettant d'afficher les réservations
             $events = new Events();
             $month = new Month(month:$_GET['month'] ?? null, year: $_GET['year'] ?? null);
             $start = $month->getFirstDay();
