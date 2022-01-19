@@ -13,15 +13,12 @@
         ?>
     </header>
     <main>
-        <nav class="navbar navbar-dark bg-primary mb-3">
-            <a href="" class="navbar-brand"> Planning </a>
-        </nav>
 
         <?php 
             require '../../Model/Month.php'; //Contient les fonctions pour faire le calendrier
             require '../../Model/events.php'; //Contient les fonctions permettant d'afficher les réservations
             $events = new Events();
-            $month = new Month(month:$_GET['month'] ?? null, year: $_GET['year'] ?? null);
+            $month = new Month(month: $_GET['month'] ?? null, year: $_GET['year'] ?? null);
             $start = $month->getFirstDay();
             $start = $start->format(format: 'N') === '1' ? $start : $month->getFirstDay()->modify(modifier:'last monday'); 
             $weeks = $month->getWeeks();
@@ -29,35 +26,35 @@
             $events = $events->getEventsBetweenByDay($start, $end);
         ?>
 
-        <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
-        <h1><?= $month->toString(); ?></h1>
-        <div>
-            <a href="planning.php?month=<?= $month->previousMonth()->month; ?>&year=<?= $month->previousMonth()->year;?>" class="btn btn-primary">&lt;</a>
-            <a href="planning.php?month=<?= $month->nextMonth()->month; ?>&year=<?= $month->nextMonth()->year;?>" class="btn btn-primary">&gt;</a>
-        </div>
-        </div>
+        <nav class="calendar_nav">
+            <h1><?= $month->toString(); ?></h1>
+            <div>
+                <a href="planning.php?month=<?= $month->previousMonth()->month; ?>&year=<?= $month->previousMonth()->year;?>" class="btn btn-info">&lt;</a>
+                <a href="planning.php?month=<?= $month->nextMonth()->month; ?>&year=<?= $month->nextMonth()->year;?>" class="btn btn-info">&gt;</a>
+            </div>
+        </nav>
 
-        <table class="calendar__table calendar__table--<?= $weeks; ?> weeks">
+        <table class="calendar__table--<?= $weeks; ?> weeks">
             <?php for ($i = 0; $i < $weeks; $i++){ ?>
-            <tr>
-                <?php 
-                foreach($month->days as $k => $day){ 
-                    $date = (clone $start)->modify( modifier:"+" . ($k + $i * 7) . "days");
-                    $eventsForDay = $events[$date->format(format:'Y-m-d')] ?? [];
-                ?>
-                <td class="<?= $month->withinMonth($date) ? '' : 'calendar__othermonth'; ?>">
-                    <?php if ($i === 0){ ?>
-                        <div class="calendar__weekday"><?= $day; ?></div>
-                    <?php }?>
-                        <div class="calendar__day"><?= $date->format(format:'d'); ?></div>
-                    <?php foreach($eventsForDay as $event){ ?> 
-                        <div class="calendar__event">
-                            <?= (new DateTime( $event['debut']))->format(format:'H:i') ?> - <a href="./reservation.php?id=<?= $event['id'];?>"><?= $event['titre'];?></a>
-                        </div>
+                <tr>
+                    <?php 
+                    foreach($month->days as $k => $day){ 
+                        $date = (clone $start)->modify( modifier:"+" . ($k + $i * 7) . "days");
+                        $eventsForDay = $events[$date->format(format:'Y-m-d')] ?? [];
+                    ?>
+                    <td class="<?= $month->withinMonth($date) ? '' : 'calendar__othermonth'; ?>">
+                        <?php if ($i === 0){ ?>
+                            <div class="calendar__weekday"><?= $day; ?></div>
+                        <?php }?>
+                            <div class="calendar__day"><?= $date->format(format:'d'); ?></div>
+                        <?php foreach($eventsForDay as $event){ ?> 
+                            <div class="calendar__event">
+                                <?= (new DateTime( $event['debut']))->format(format:'H:i') ?> - <a href="./reservation.php?id=<?= $event['id'];?>"><?= $event['titre'];?></a>
+                            </div>
+                        <?php } ?>
+                    </td>
                     <?php } ?>
-                </td>
-                <?php } ?>
-            </tr>
+                </tr>
             <?php } ?>
         </table>
     </main>
