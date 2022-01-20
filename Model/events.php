@@ -18,7 +18,7 @@ class Events{
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
             \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
         ]);
-        $sql = "SELECT * FROM reservations WHERE debut BETWEEN '{$debut->format(format: 'Y-m-d 00:00:00')}' AND '{$end->format(format: 'Y-m-d 23:59:59')}'";
+        $sql = "SELECT * FROM reservations /*INNER JOIN utilisateurs ON reservations.id_utilisateur = utilisateurs.login */ WHERE debut BETWEEN '{$debut->format(format: 'Y-m-d 00:00:00')}' AND '{$end->format(format: 'Y-m-d 23:59:59')}'";
         $statement = $pdo->query($sql);
         $results = $statement->fetchAll();
         return $results;

@@ -30,7 +30,8 @@
             <h1><?= $month->toString(); ?></h1>
             <div>
                 <a href="planning.php?month=<?= $month->previousMonth()->month; ?>&year=<?= $month->previousMonth()->year;?>" class="btn btn-info">&lt;</a>
-                <a href="planning.php?month=<?= $month->nextMonth()->month; ?>&year=<?= $month->nextMonth()->year;?>" class="btn btn-info">&gt;</a>
+                <a href="planning.php?month=<?= $month->nextMonth()->month; ?>&year=<?= $month->nextMonth()->year;?>" class="btn btn-info">&gt;</a>&emsp13;
+                <a href="reservation-form.php" class="btn btn-info add_reserv">Réserver</a> 
             </div>
         </nav>
 
@@ -49,7 +50,7 @@
                             <div class="calendar__day"><?= $date->format(format:'d'); ?></div>
                         <?php foreach($eventsForDay as $event){ ?> 
                             <div class="calendar__event">
-                                <?= (new DateTime( $event['debut']))->format(format:'H:i') ?> - <a href="./reservation.php?id=<?= $event['id'];?>"><?= $event['titre'];?></a>
+                                <?= (new DateTime( $event['debut']))->format(format:'H:i') ?> - <a href="./reservation.php?id=<?= $event['id'];?>"> <?php /* $event['login']; */?> <?= $event['titre'];?></a>
                             </div>
                         <?php } ?>
                     </td>

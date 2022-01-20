@@ -1,13 +1,12 @@
-main {
-    background-image: url(../MEDIAS/triangle.jpg);
-    /* background-color: rgb(24, 24, 24); */
-    /* background-blend-mode:overlay; */
+body {
+        background-image: url(../MEDIAS/triangle.jpg);
+}
 
+main {
     background-position: top;
     width: 100%;
     color: white;
     padding: 5%;
-
 }
 
 table{
@@ -16,23 +15,21 @@ table{
     padding: 10%;
     background-color: rgb(24, 24, 24,.8);
 }
+
 table td {
-    
     padding: 10px;
     border: 1px solid #CCC;
     vertical-align: top;
     width: 10%;
     height: 20%;
 }
+
 .calendar_nav {
     display: flex;
-    /* padding-left: 3%; */
-    /* justify-content: first baseline; */
 }
+
 .calendar_nav h1{
-    /* display: flex; */
     padding-right: 5%;
-    /* justify-content: first baseline; */
 }
 
 .calendar__table--6weeks td {
@@ -50,4 +47,9 @@ table td {
 }
 .calendar__othermonth .calendar__day {
     opacity: 0.3;
+}
+
+.calendar__event a {
+    text-decoration: none;
+    color: rgb(126, 241, 241);
 }
