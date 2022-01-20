@@ -1,11 +1,11 @@
 <?php 
 class Events{
 
-    // private $pdo;
+    private $pdo;
 
-    // public function __construct(\PDO $pdo) {
-    //     $this->pdo = $pdo;
-    // }
+    public function __construct(PDO $pdo) {
+        $this->pdo = $pdo;
+    }
     
     /**
      * Récupère les évènements commencant entre 2 dates
@@ -19,7 +19,7 @@ class Events{
             \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
         ]);
         $sql = "SELECT * FROM reservations /*INNER JOIN utilisateurs ON reservations.id_utilisateur = utilisateurs.login */ WHERE debut BETWEEN '{$debut->format(format: 'Y-m-d 00:00:00')}' AND '{$end->format(format: 'Y-m-d 23:59:59')}'";
-        $statement = $pdo->query($sql);
+        $statement = $this->pdo->query($sql);
         $results = $statement->fetchAll();
         return $results;
     }
@@ -42,6 +42,22 @@ class Events{
             }
         }
         return $days;
+    }
+
+    /**
+     * Récupérer une réservation
+     * @param int $id
+     * @return array
+     * @throws \Exception
+     */
+    public function find (int $id): array {
+        $statement = $this->pdo->query(statement: "SELECT * FROM reservations WHERE id = $id LIMIT 1")->fetch();
+        $statement-> setFetchMode(mode: \PDO::FETCH_CLASS, classNameObject: \Model\event::class);
+        $result = $statement->fetch();
+        if($result === false) {
+            throw new Exception(message: 'Aucun résultat n\'a été trouvé');
+        }
+        return $result;
     }
 
 }

@@ -17,7 +17,8 @@
         <?php 
             require '../../Model/Month.php'; //Contient les fonctions pour faire le calendrier
             require '../../Model/events.php'; //Contient les fonctions permettant d'afficher les réservations
-            $events = new Events();
+            $pdo = get_pdo();
+            $events = new Events($pdo);
             $month = new Month(month: $_GET['month'] ?? null, year: $_GET['year'] ?? null);
             $start = $month->getFirstDay();
             $start = $start->format(format: 'N') === '1' ? $start : $month->getFirstDay()->modify(modifier:'last monday'); 
