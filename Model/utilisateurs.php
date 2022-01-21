@@ -98,9 +98,9 @@ public function Update($login, $password){
             'password' => $hash,
         ));
 }
-public function Delete() {
-    $requete_supp = $this->bdd->query("DELETE FROM utilisateurs WHERE login = '$this->login'");
-    $this->disconnect();
-}
+// public function Delete() {
+//     $requete_supp = $this->bdd->query("DELETE FROM utilisateurs WHERE login = '$this->login'");
+//     $this->disconnect();
+// }
 }
 ?>

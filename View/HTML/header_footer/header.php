@@ -14,14 +14,14 @@ require('../../Model/bdd.php');
 <body>
     <header>
         <?php 
-        if(isset($_SESSION)){
+        if(($_SESSION == true)){
         ?>
         <nav>   
         <ul class="lr_nav_header">
                 <img src="../MEDIAS/vr_universe.png" width="15%">
                 <li><a class="lr_li_header" href="index.php"> Accueil</a></li>
                 <li><a class="lr_li_header" href="planning.php"> Planning</a></li>
-                <li><a class="lr_li_header" href="inscription.php"> Réservation</a></li>
+                <li><a class="lr_li_header" href="reservation-form.php"> Réservation</a></li>
                 <li><a class="lr_li_header" href="deconnexion.php"> Déconnexion</a></li> 
             </ul>
         </nav>

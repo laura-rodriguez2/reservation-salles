@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../../Model/bdd.php';
 require '../../Model/Month.php';
 require '../../Model/Events.php';
