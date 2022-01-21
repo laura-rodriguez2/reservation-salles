@@ -1,6 +1,7 @@
 <?php
 session_start();
 require('../../Model/bdd.php');
+$bdd = new PDO('mysql:host=localhost;dbname=reservationsalles', 'root', '');
 if (isset($_SESSION['id']) && $_SESSION['id'] > 0) {
     $requtilisateur = $bdd->prepare('SELECT * FROM utilisateurs WHERE id = ?');
     $requtilisateur->execute(array($_SESSION['id']));
@@ -64,7 +65,6 @@ if (isset($_SESSION['id']) && $_SESSION['id'] > 0) {
                     <input type="password" class="box-input" name="newmdp2" placeholder="Confirmez votre mot de passe" required /><br><br>
                     <input type="submit" name="submit" value="Enregistrer mes informations" class="btn btn-secondary btn-lg" /><br><br>
                     <a href="deconnexion.php"><input class="btn btn-secondary btn-lg" type="button" value="Déconnexion"></a>
-            <input class="box-input" type="button" id="supprimer" name="supprimer" value="Supprimer mon compte"> <br><br>
         </form>
     </main>
     <footer>

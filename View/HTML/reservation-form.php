@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../../Model/bdd.php';
 ?>
 <!DOCTYPE html>

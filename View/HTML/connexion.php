@@ -2,9 +2,11 @@
 session_start();
 require('../../Model/bdd.php');
 
-if(isset($_POST['formconnexion'])){
+if(isset($_POST['formconnexion']))
+{
     $loginconnect = htmlspecialchars($_POST['loginconnect']);
     $passwordconnect = $_POST['passwordconnect'];
+    $bdd = new PDO('mysql:host=localhost;dbname=reservationsalles', 'root', '');
     
     if(!empty($loginconnect) AND !empty($passwordconnect))
         {
