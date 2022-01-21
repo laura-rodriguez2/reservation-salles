@@ -8,4 +8,29 @@ if (!function_exists('get_pdo')) {
         ]);
     }
 }
+
+if (!function_exists('e404')) {
+function e404() {
+    echo "Error 404";
+}
+}
+
+if (!function_exists('dd')) {
+function dd(...$vars) {
+    foreach($vars as $var) {
+        echo '<pre>';
+        var_dump($var);
+        echo '</pre>';
+    }
+}
+}
+
+if (!function_exists('h')) {
+function h(?string $value): string {
+    if ($value === null) {
+        return '';
+    }
+    return htmlentities($value);
+}
+}
 ?>

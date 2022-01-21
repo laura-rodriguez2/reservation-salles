@@ -1,9 +1,9 @@
 <?php
 require '../../Model/bdd.php';
 require '../../Model/Month.php';
-require '../../Model/events.php';
+require '../../Model/Events.php';
 $pdo = get_pdo();
-$events = new Events($pdo);
+$events = new \Model\Events($pdo);
 
 if(!isset($_GET['id'])) {
     header ('location: /index.php');
@@ -11,7 +11,7 @@ if(!isset($_GET['id'])) {
 try {
     $event = $events->find($_GET['id']);
 } catch (\Exception $e) {
-    echo "Page 404";
+    // e404();
 }
 ?>
 <!DOCTYPE html>
@@ -31,15 +31,15 @@ try {
         ?>
     </header>
     <main>
-        <h1><?= $even->getName(); ?></h1>
+        <h1><?= h($event->getName()); ?></h1>
 
         <ul>
-            <li>Date: <?= $even->getStart()->format('d/m/Y'); ?></li>
-            <li>Heure de démarrage: <?= $even->getStart()->format('H:i'); ?></li>
-            <li>Heure de fin: <?= $even->getEnd()->format('H:i'); ?></li>
+            <li>Date: <?= $event->getStart()->format('d/m/Y'); ?></li>
+            <li>Heure de démarrage: <?= $event->getStart()->format('H:i'); ?></li>
+            <li>Heure de fin: <?= $event->getEnd()->format('H:i'); ?></li>
             <li>
                 Description: <br>
-                <?= $even->getDescription(); ?>
+                <?= h($event->getDescription()); ?>
             </li>
         </ul>
     </main>
