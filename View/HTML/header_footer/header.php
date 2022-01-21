@@ -14,7 +14,7 @@ require('../../Model/bdd.php');
 <body>
     <header>
         <?php 
-        if($_SESSION == true){
+        if(isset($_SESSION)){
         ?>
         <nav>   
         <ul class="lr_nav_header">
