@@ -50,9 +50,10 @@ class Events{
      * @return array
      * @throws \Exception
      */
-    public function find (int $id): array {
+    public function find (int $id) \event {
+        // require 'event.php';
         $statement = $this->pdo->query(statement: "SELECT * FROM reservations WHERE id = $id LIMIT 1")->fetch();
-        $statement-> setFetchMode(mode: \PDO::FETCH_CLASS, classNameObject: \Model\event::class);
+        $statement-> setFetchMode(mode: \PDO::FETCH_CLASS, classNameObject: event::class);
         $result = $statement->fetch();
         if($result === false) {
             throw new Exception(message: 'Aucun résultat n\'a été trouvé');

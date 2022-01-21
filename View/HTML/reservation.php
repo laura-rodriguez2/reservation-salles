@@ -4,6 +4,15 @@ require '../../Model/Month.php';
 require '../../Model/events.php';
 $pdo = get_pdo();
 $events = new Events($pdo);
+
+if(!isset($_GET['id'])) {
+    header ('location: /index.php');
+}
+try {
+    $event = $events->find($_GET['id']);
+} catch (\Exception $e) {
+    echo "Page 404";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,19 +31,16 @@ $events = new Events($pdo);
         ?>
     </header>
     <main>
-        <?php
-        try {
-            $event = $events->find($_GET['id']); 
-        } catch (\Exception $e) {
-            echo "Error 404";
-        }
-        ?>
-        <h1><?= $event['titre']; ?></h1>
+        <h1><?= $even->getName(); ?></h1>
 
         <ul>
-            <li>Date: <?= $event->getStart()->format('d/m/Y'); ?></li>
-            <li>Heure de démarrage: <?= (new DateTime($event['debut']))->format('H:i'); ?></li>
-            <li>Description: <?= (new DateTime($event['description'])) ?></li>
+            <li>Date: <?= $even->getStart()->format('d/m/Y'); ?></li>
+            <li>Heure de démarrage: <?= $even->getStart()->format('H:i'); ?></li>
+            <li>Heure de fin: <?= $even->getEnd()->format('H:i'); ?></li>
+            <li>
+                Description: <br>
+                <?= $even->getDescription(); ?>
+            </li>
         </ul>
     </main>
     <footer>

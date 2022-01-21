@@ -51,7 +51,7 @@
                             <div class="calendar__day"><?= $date->format(format:'d'); ?></div>
                         <?php foreach($eventsForDay as $event){ ?> 
                             <div class="calendar__event">
-                                <?= (new DateTime( $event['debut']))->format(format:'H:i') ?> - <a href="./reservation.php?id=<?= $event['id'];?>"> <?php /* $event['login']; */?> <?= $event['titre'];?></a>
+                                <?= (new DateTime( $event['debut']))->format(format:'H:i') ?> - <a href="./reservation.php?id=<?= $event['id'];?>"> <?= $event['titre'];?></a>
                             </div>
                         <?php } ?>
                     </td>

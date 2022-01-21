@@ -8,9 +8,9 @@ class Event {
 
     private $description;
 
-    private $start;
+    private $debut;
 
-    private $end;
+    private $fin;
 
     public function getId (): int {
         return $this->id;
@@ -21,7 +21,7 @@ class Event {
     }
 
     public function getDescription (): string {
-        return $this->description;
+        return $this->description ?? '';
     }
 
     public function getStart (): \DateTime {
