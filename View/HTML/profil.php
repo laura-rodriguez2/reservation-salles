@@ -1,9 +1,6 @@
 <?php
+session_start();
 require('../../Model/bdd.php');
-require('../../Model/utilisateurs.php');
-if (isset($_POST['submit'])){
-    $user -> update($_POST['newlogin'] AND $_POST['newmdp']);
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,7 +21,7 @@ if (isset($_POST['submit'])){
     <main>
         <form id="form_inscription" action="" method="POST">
             <h2 class="lr_h2">Modifier mes informations</h1><br>
-                    <input type="text" class="box-input" name="newlogin" value="<?php echo $_SESSION['login']; ?>" required /><br>
+                    <input type="text" class="box-input" name="newlogin" value="<?php echo $_SESSION['login']; ?>"/><br>
                     <input type="password" class="box-input" name="newmdp" placeholder="Mot de passe" required /><br>
                     <input type="password" class="box-input" name="newmdp2" placeholder="Confirmez votre mot de passe" required /><br><br>
                     <input type="submit" name="submit" value="Enregistrer mes informations" class="btn btn-secondary btn-lg" /><br><br>

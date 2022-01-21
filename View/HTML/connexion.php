@@ -1,20 +1,42 @@
 <?php
+session_start();
 require('../../Model/bdd.php');
-require('../../Model/utilisateurs.php');
-if(isset($_POST['formconnexion'])){
-    if(isset($_POST['loginconnect']) AND isset($_POST['passwordconnect'])){
-        $login = htmlspecialchars($_POST['loginconnect']);
-        $password = htmlspecialchars($_POST['passwordconnect']);
-        $user = new User($login, $password, NULL);
-        $user_co = $user->connect($login, $password);
-        $_SESSION['user'] = $user_co;
-        // header('location: profil.php');
-    }
+if(isset($_POST['formconnexion']))
+{
+    $loginconnect = htmlspecialchars($_POST['loginconnect']);
+    $passwordconnect = $_POST['passwordconnect'];
+    
+    if(!empty($loginconnect) AND !empty($passwordconnect))
+        {
+            $requeteutilisateur = $bdd->prepare("SELECT * FROM utilisateurs WHERE login = ?"); // SAVOIR SI LE MEME LOGIN EST PRIS
+            $requeteutilisateur->execute(array($loginconnect));   // Execute le prepare
+            $result = $requeteutilisateur->fetchAll();   // Return TOUTE la requete ( tableau )
+                if (count($result) > 0){ // S'il trouve pas de même login, il return mauvais login
+                    $sqlPassword = $result[0]['password'];  // Récupere le resultat du tableau (0)  /!\ SI PAS LE 0 ça marche pas /!\ et la colonne password
+                    if(password_verify($passwordconnect, $sqlPassword)) // Si passwordconnect est hashé et qu'il est pareil que sql password c'est bon 
+                        {
+                        $_SESSION['id'] = $result[0]['id'];
+                        $_SESSION['login'] = $result[0]['login'];
+                        header("Location: profil.php");
+                        }
+                    else 
+                        {
+                        $erreur = "Mauvais mot de passe !";
+                        }
+                        
+            }
+            else{
+                $erreur = "Mauvais login !";
+            }
+        }
+    else
+        {
+        $erreur = "Tous les champs doivent être remplis !";
+        }
 }
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href='../CSS/connexion.css' />
