@@ -17,7 +17,8 @@
         <?php 
             require '../../Model/Month.php'; //Contient les fonctions pour faire le calendrier
             require '../../Model/events.php'; //Contient les fonctions permettant d'afficher les réservations
-            $events = new Events();
+            $pdo = get_pdo();
+            $events = new Events($pdo);
             $month = new Month(month: $_GET['month'] ?? null, year: $_GET['year'] ?? null);
             $start = $month->getFirstDay();
             $start = $start->format(format: 'N') === '1' ? $start : $month->getFirstDay()->modify(modifier:'last monday'); 
@@ -50,7 +51,7 @@
                             <div class="calendar__day"><?= $date->format(format:'d'); ?></div>
                         <?php foreach($eventsForDay as $event){ ?> 
                             <div class="calendar__event">
-                                <?= (new DateTime( $event['debut']))->format(format:'H:i') ?> - <a href="./reservation.php?id=<?= $event['id'];?>"> <?php /* $event['login']; */?> <?= $event['titre'];?></a>
+                                <?= (new DateTime( $event['debut']))->format(format:'H:i') ?> - <a href="./reservation.php?id=<?= $event['id'];?>"> <?= $event['titre'];?></a>
                             </div>
                         <?php } ?>
                     </td>
