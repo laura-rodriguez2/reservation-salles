@@ -1,5 +1,5 @@
 .lr_nav_header{
-    padding-bottom: 1%;
+    /* padding-top: 1%; */
     margin: 0%;
     background-color: rgb(24, 24, 24,.8);
 
@@ -15,14 +15,17 @@
         color: #fff;
         text-shadow:
             0 0 7px rgb(4, 0, 255),
-            0 0 10px rgb(4, 0, 255),
+            0 0 10px rgb(119, 118, 196),
             0 0 21px rgb(4, 0, 255),
             0 0 42px rgb(4, 0, 255),
             0 0 82px #0fa,
             0 0 92px #0fa,
             0 0 102px #0fa,
             0 0 151px #0fa;
+    display: flex;
+    padding-top: 50%;
+    /* padding-right: 5%; */
 }
 .lr_li_header:hover{
     color: rgb(81, 50, 255);
-    }
+}

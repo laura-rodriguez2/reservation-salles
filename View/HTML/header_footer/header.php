@@ -18,8 +18,8 @@ require('../../Model/bdd.php');
         if($_SESSION == true){
         ?>
         <nav>   
-            <ul class="lr_nav_header">
-                <img src="../MEDIAS/vr_universe.png" width="20%">
+        <ul class="lr_nav_header">
+                <img src="../MEDIAS/vr_universe.png" width="15%">
                 <li><a class="lr_li_header" href="index.php"> Accueil</a></li>
                 <li><a class="lr_li_header" href="planning.php"> Planning</a></li>
                 <li><a class="lr_li_header" href="inscription.php"> Réservation</a></li>
@@ -30,10 +30,8 @@ require('../../Model/bdd.php');
             } else{ 
         ?>
         <nav>   
-            <div class="lr_nav_header">
-                <img src="../MEDIAS/vr_universe.png" width="20%">
-            </div> 
-            <ul class="lr_nav_header">
+        <ul class="lr_nav_header">
+                <img src="../MEDIAS/vr_universe.png" width="15%">
                 <li><a class="lr_li_header" href="index.php"> Accueil</a></li>
                 <li><a class="lr_li_header" href="planning.php"> Planning</a></li>
                 <li><a class="lr_li_header" href="inscription.php"> Inscription</a></li>
