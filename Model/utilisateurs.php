@@ -10,6 +10,7 @@ public $password;
         $this->login = $login;
         $this->password = $password;
         $this->password2 = $password2;
+        $this->connect = "0";
         $this->bdd = $this->getBdd();
     }
     
