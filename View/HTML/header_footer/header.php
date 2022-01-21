@@ -12,30 +12,36 @@ require('../../Model/bdd.php');
 </head>
 
 <body>
-    <header>
+    <header class=al_header>
         <?php 
         if(isset($_SESSION)){
         ?>
-        <nav>   
-        <ul class="lr_nav_header">
+        <nav>  
+            <div class="lr_nav_header">
                 <img src="../MEDIAS/vr_universe.png" width="15%">
-                <li><a class="lr_li_header" href="index.php"> Accueil</a></li>
-                <li><a class="lr_li_header" href="planning.php"> Planning</a></li>
-                <li><a class="lr_li_header" href="inscription.php"> Réservation</a></li>
-                <li><a class="lr_li_header" href="deconnexion.php"> Déconnexion</a></li> 
+            </div>
+        <ul class="lr_li_header">
+                <li><a href="index.php"> Accueil</a></li>
+                <li><a href="planning.php"> Planning</a></li>
+                <li><a href="reservation-form.php"> Réservation</a></li>
+                <li><a href="profil.php"> Profil </a></li>
+                <li><a href="deconnexion.php"> Déconnexion</a></li> 
             </ul>
         </nav>
         <?php 
             } else{ 
         ?>
-        <nav>   
-        <ul class="lr_nav_header">
-                <img src="../MEDIAS/vr_universe.png" width="15%">
-                <li><a class="lr_li_header" href="index.php"> Accueil</a></li>
-                <li><a class="lr_li_header" href="planning.php"> Planning</a></li>
-                <li><a class="lr_li_header" href="inscription.php"> Inscription</a></li>
-                <li><a class="lr_li_header" href="connexion.php"> Connexion</a></li> 
+        <nav>
+            <div class="lr_nav_header">
+            <img src="../MEDIAS/vr_universe.png" width="15%">
+            </div>
+            <ul class="lr_li_header">
+                <li><a href="index.php"> Accueil</a></li>
+                <li><a href="planning.php"> Planning</a></li>
+                <li><a href="inscription.php"> Inscription</a></li>
+                <li><a href="connexion.php"> Connexion</a></li> 
             </ul>
+        
         </nav>
         <?php 
             }
