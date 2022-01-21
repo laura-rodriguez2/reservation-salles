@@ -1,8 +1,8 @@
 <?php
 session_start();
 require('../../Model/bdd.php');
-if(isset($_POST['formconnexion']))
-{
+
+if(isset($_POST['formconnexion'])){
     $loginconnect = htmlspecialchars($_POST['loginconnect']);
     $passwordconnect = $_POST['passwordconnect'];
     
