@@ -1,5 +1,4 @@
 <?php
-session_start();
 require('../../Model/bdd.php');
 ?>
 
@@ -23,7 +22,7 @@ require('../../Model/bdd.php');
                 <li><a class="lr_li_header" href="index.php"> Accueil</a></li>
                 <li><a class="lr_li_header" href="planning.php"> Planning</a></li>
                 <li><a class="lr_li_header" href="inscription.php"> Réservation</a></li>
-                <li><a class="lr_li_header" href="connexion.php"> Déconnexion</a></li> 
+                <li><a class="lr_li_header" href="deconnexion.php"> Déconnexion</a></li> 
             </ul>
         </nav>
         <?php 

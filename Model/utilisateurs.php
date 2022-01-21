@@ -57,24 +57,30 @@ public function register($login, $password){
     }
 }
 
-public function connect($login, $password){
-    $requete_connexion = $this->bdd->prepare("SELECT * FROM utilisateurs WHERE login = ?");
-    $requete_connexion->execute(array($this->login));
-    $user = $requete_connexion->fetch(); 
+// public function connect($_login, $_password) {
 
-if ($login == $user['login'] && $password == $user['password']) {
-    echo "Vous etes co !";
-    $this->id           = $user['id'];
-    $this->login        = $user['login'];
-    $this->password     = $user['password'];
-    $this->connect      = "1";      
-    return ($this);
-    // header('location: profil.php');
-}
-    else {
-        echo "Mot de passe ou identifiant incorrect"; 
-    }
-}
+//     $_login = htmlspecialchars($_login);
+//     $_password = htmlspecialchars($_password);
+
+//     $this->_login = $_login;
+//     $this->_password = $_password;
+
+//     $SQL = "SELECT * FROM utilisateurs WHERE login = '$_login'";
+//     $query = $this->bdd->query($SQL);
+//     $user = $query->fetch(PDO::FETCH_ASSOC);
+//     if ($_password == null) {
+//     echo 'remplissez tout les champs';
+//     } 
+//     else {
+//         if (password_verify($_password, $user['password'])) {
+//         $_SESSION['user'] = $user;
+//         echo "vous etes co";
+//     } 
+//         else {
+//             echo "Le login ou le mot de passe n'est pas correct !";
+//         }
+//     }
+// }
 
 public function disconnect(){
     session_unset();
@@ -83,7 +89,7 @@ public function disconnect(){
     $this->login= null;
 }
 
-public function update($login, $password){
+public function Update($login, $password){
     $hash = password_hash($this->password, PASSWORD_DEFAULT);
     $requete_update = $this->bdd->query("UPDATE utilisateurs SET login = '$login', password='$password' WHERE login = '$this->login'");
     $requete_update->execute(array(
@@ -92,7 +98,7 @@ public function update($login, $password){
             'password' => $hash,
         ));
 }
-public function delete() {
+public function Delete() {
     $requete_supp = $this->bdd->query("DELETE FROM utilisateurs WHERE login = '$this->login'");
     $this->disconnect();
 }
