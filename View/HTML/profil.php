@@ -1,6 +1,44 @@
 <?php
 session_start();
 require('../../Model/bdd.php');
+if (isset($_SESSION['id']) && $_SESSION['id'] > 0) {
+    $requtilisateur = $bdd->prepare('SELECT * FROM utilisateurs WHERE id = ?');
+    $requtilisateur->execute(array($_SESSION['id']));
+    $infoutilisateur = $requtilisateur->fetch();
+
+    if (isset($_POST['newlogin']) && !empty($_POST['newlogin']) && $_POST['newlogin'] != $infoutilisateur['login']) {
+        $login = $_POST['newlogin'];
+        $requetelogin = $bdd->prepare("SELECT * FROM utilisateurs WHERE login = ?");
+        $requetelogin->execute(array($login));
+        $loginexist = $requetelogin->rowCount();
+
+        if ($loginexist !== 0) {
+            $msg = "Le login existe déjà !";
+        } else {
+            $newlogin = htmlspecialchars($_POST['newlogin']);
+            $insertlogin = $bdd->prepare("UPDATE utilisateurs SET login = ? WHERE id = ?");
+            $insertlogin->execute(array($newlogin, $_SESSION['id']));
+            $_SESSION['login'] = $newlogin;
+            header('Location: profil.php');
+        }
+    }
+    }
+    if (isset($_POST['newmdp']) && !empty($_POST['newmdp']) && isset($_POST['newmdp2']) && !empty($_POST['newmdp2'])) {
+        $mdp1 = $_POST['newmdp'];
+        $mdp2 = $_POST['newmdp2'];
+
+        if ($mdp1 == $mdp2) {
+            $hachage = password_hash($mdp1, PASSWORD_BCRYPT);
+            $insertmdp = $bdd->prepare("UPDATE utilisateurs SET password = ? WHERE id = ?");
+            $insertmdp->execute(array($hachage, $_SESSION['id']));
+            header('Location: profil.php');
+        } else {
+            $msg = "Vos mots de passes ne correspondent pas !";
+        }
+    }
+    if (isset($_POST['newlogin']) && $_POST['newlogin'] == $infoutilisateur['login']) {
+        header('Location: profil.php');
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,11 +64,6 @@ require('../../Model/bdd.php');
                     <input type="password" class="box-input" name="newmdp2" placeholder="Confirmez votre mot de passe" required /><br><br>
                     <input type="submit" name="submit" value="Enregistrer mes informations" class="btn btn-secondary btn-lg" /><br><br>
                     <a href="deconnexion.php"><input class="btn btn-secondary btn-lg" type="button" value="Déconnexion"></a>
-
-<?php if(isset($_POST['button'])){
-    $user->delete($_SESSION['user']['id']);
-}
-?>
             <input class="box-input" type="button" id="supprimer" name="supprimer" value="Supprimer mon compte"> <br><br>
         </form>
     </main>
