@@ -1,10 +1,11 @@
 <?php 
 namespace Model;
+
 class Event {
 
     private $id;
 
-    private $name;
+    private $titre;
 
     private $description;
 
@@ -17,7 +18,7 @@ class Event {
     }
 
     public function getName (): string {
-        return $this->name;
+        return $this->titre;
     }
 
     public function getDescription (): string {
