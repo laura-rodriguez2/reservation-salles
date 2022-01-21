@@ -12,7 +12,7 @@ main{
 .al_scroll-snap{
     height: 100vh;
     overflow-y: scroll;
-    scroll-snap-type: y mandatory;
+    /* scroll-snap-type: y mandatory; */
 }
 .al_bloc{
     font-size: 30px;
@@ -21,7 +21,7 @@ main{
     align-items: center;
     border-bottom: 5px solid rgb(0, 0, 0);
     height: 100vh;
-    scroll-snap-align: center;
+    /* scroll-snap-align: center; */
 }
 ::-webkit-scrollbar{
     width: 0px;
