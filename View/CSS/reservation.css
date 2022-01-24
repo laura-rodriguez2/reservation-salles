@@ -1,0 +1,21 @@
+body {
+    background-image: url(../MEDIAS/fondcercle.jpg);
+}
+
+main {
+    color: white;
+    margin: 10%;
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(24, 24, 24,.8);
+}
+
+h1{
+    color: grey;
+}
+
+li{
+list-style-type: none;  
+padding: 2%;
+}
