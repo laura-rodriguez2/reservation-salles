@@ -57,6 +57,8 @@ if($_SESSION == true){
         echo 'Erreur : Vous devez être connecté pour voir les réservations'; 
         }
 ?>
-    <a href="planning.php">Redirection</a>
+    <br><a href="connexion.php">Se connecter</a>
+    <br><a href="inscription.php">S'inscrire</a>
+    <br><br><a href="planning.php">Retourner au planning</a>
 </html>
 </body>
