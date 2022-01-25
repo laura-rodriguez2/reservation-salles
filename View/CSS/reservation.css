@@ -21,7 +21,10 @@ padding: 2%;
 }
 
 .error {
-    /* display: flex;
+    display: flex;
     justify-content: center;
-    flex-direction: column; */
+    flex-direction: column;
+}
+.error a {
+    margin: 2%;
 }

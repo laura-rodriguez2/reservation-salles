@@ -43,17 +43,18 @@ $events = new \Model\Events($pdo);
             <ul>
                 <h1>Détail de la réservation</h1>
                 <h2><?= h($events['titre']); ?></h2>
-                <li>De <?= $events['debut']; ?></li>
+                <li>Du <?= $events['debut']; ?></li>
                 <li>à <?= $events['fin']; ?></li>
                 <li> Description: <?= h($events['description']); ?></li>
             </ul>
-            <div class="error">
-                <?php } else {
+                <?php } else { ?>
+                                <div class="error">
+<?php
                     echo 'Erreur : Vous devez être connecté pour voir les réservations';
                     ?>
                 <a href="connexion.php" class="btn btn-info add_reserv">Se connecter</a>
                 <a href="inscription.php" class="btn btn-info add_reserv">S'inscrire</a>
-                <a href="planning.php" class="btn btn-info add_reserv">Retourner au planning</a>
+                <a href="planning.php" class="btn btn-primary add_reserv">Retourner au planning</a>
             </div>
         <?php } ?>
     </main>
