@@ -2,7 +2,7 @@ body {
     background-image: url(../MEDIAS/fondcercle.jpg);
 }
 
-main {
+main{
     color: white;
     margin: 10%;
     padding: 2%;
@@ -11,11 +11,17 @@ main {
     background-color: rgb(24, 24, 24,.8);
 }
 
-h1{
+main h1{
     color: grey;
 }
 
-li{
+main li{
 list-style-type: none;  
 padding: 2%;
+}
+
+.error {
+    /* display: flex;
+    justify-content: center;
+    flex-direction: column; */
 }

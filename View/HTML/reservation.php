@@ -6,21 +6,7 @@ require '../../Model/Events.php';
 $pdo = get_pdo();
 $events = new \Model\Events($pdo);
 
-if($_SESSION == true){
-    if (isset($_GET['id']) and !empty($_GET['id'])) {
-        $get_id = htmlspecialchars($_GET['id']);
-        $events = $pdo->prepare('SELECT * FROM reservations WHERE id = ?');
-        $events->execute(array($get_id));
-        if ($events->rowCount() == 1) {
-            $events = $events->fetch();
-            $titre = $events['titre'];
-            $contenu = $events['description'];
-        } else {
-            die('Cet events n\'existe pas !');
-        }
-    } else {
-        die('Erreur');
-    }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,13 +25,37 @@ if($_SESSION == true){
         ?>
     </header>
     <main>
-        <ul>
-            <h1>Détail de la réservation</h1>
-            <h2><?= h($events['titre']); ?></h2>
-            <li>De <?= $events['debut']; ?></li>
-            <li>à <?= $events['fin']; ?></li>
-            <li> Description: <?= h($events['description']); ?></li>
-        </ul>
+        <?php if ($_SESSION == true) {
+            if (isset($_GET['id']) and !empty($_GET['id'])) {
+                $get_id = htmlspecialchars($_GET['id']);
+                $events = $pdo->prepare('SELECT * FROM reservations WHERE id = ?');
+                $events->execute(array($get_id));
+                if ($events->rowCount() == 1) {
+                    $events = $events->fetch();
+                    $titre = $events['titre'];
+                    $contenu = $events['description'];
+                } else {
+                    die('Cet events n\'existe pas !');
+                }
+            } else {
+                die('Erreur');
+            } ?>
+            <ul>
+                <h1>Détail de la réservation</h1>
+                <h2><?= h($events['titre']); ?></h2>
+                <li>De <?= $events['debut']; ?></li>
+                <li>à <?= $events['fin']; ?></li>
+                <li> Description: <?= h($events['description']); ?></li>
+            </ul>
+            <div class="error">
+                <?php } else {
+                    echo 'Erreur : Vous devez être connecté pour voir les réservations';
+                    ?>
+                <a href="connexion.php" class="btn btn-info add_reserv">Se connecter</a>
+                <a href="inscription.php" class="btn btn-info add_reserv">S'inscrire</a>
+                <a href="planning.php" class="btn btn-info add_reserv">Retourner au planning</a>
+            </div>
+        <?php } ?>
     </main>
 
     <footer>
@@ -53,12 +63,6 @@ if($_SESSION == true){
         require_once('header_footer/footer.php');
         ?>
     </footer>
-<?php } else {
-        echo 'Erreur : Vous devez être connecté pour voir les réservations'; 
-        }
-?>
-    <br><a href="connexion.php">Se connecter</a>
-    <br><a href="inscription.php">S'inscrire</a>
-    <br><br><a href="planning.php">Retourner au planning</a>
+
 </html>
 </body>
