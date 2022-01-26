@@ -1,3 +1,20 @@
 body {
     background-image: url(../MEDIAS/triangle.jpg);
 }
+main{
+    color: white;
+    margin: 10%;
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(24, 24, 24,.8);
+}
+
+main h1{
+    color: grey;
+}
+
+main input{
+padding: 2%;
+margin: 2%;
+}

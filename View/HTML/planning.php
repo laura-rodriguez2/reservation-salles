@@ -1,5 +1,16 @@
 <?php 
 session_start();
+   require '../../Model/bdd.php';
+   require '../../Model/Month.php'; //Contient les fonctions pour faire le calendrier
+   require '../../Model/events.php'; //Contient les fonctions permettant d'afficher les réservations
+   $pdo = get_pdo();
+   $events = new \Model\Events($pdo);
+   $month = new Month(month: $_GET['month'] ?? null, year: $_GET['year'] ?? null);
+   $start = $month->getFirstDay();
+   $start = $start->format(format: 'N') === '1' ? $start : $month->getFirstDay()->modify(modifier:'last monday'); 
+   $weeks = $month->getWeeks();
+   $end = (clone $start)->modify(modifier: '+' . (6 + 7 * ($weeks - 1)) . 'days');
+   $events = $events->getEventsBetweenByDay($start, $end);
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,22 +26,8 @@ session_start();
         require_once('header_footer/header.php');
         ?>
     </header>
+
     <main>
-
-        <?php 
-            // require '../../Model/bdd.php';
-            require '../../Model/Month.php'; //Contient les fonctions pour faire le calendrier
-            require '../../Model/events.php'; //Contient les fonctions permettant d'afficher les réservations
-            $pdo = get_pdo();
-            $events = new \Model\Events($pdo);
-            $month = new Month(month: $_GET['month'] ?? null, year: $_GET['year'] ?? null);
-            $start = $month->getFirstDay();
-            $start = $start->format(format: 'N') === '1' ? $start : $month->getFirstDay()->modify(modifier:'last monday'); 
-            $weeks = $month->getWeeks();
-            $end = (clone $start)->modify(modifier: '+' . (6 + 7 * $weeks - 1) . 'days');
-            $events = $events->getEventsBetweenByDay($start, $end);
-        ?>
-
         <nav class="calendar_nav">
             <h1><?= $month->toString(); ?></h1>
             <div>
@@ -41,28 +38,30 @@ session_start();
         </nav>
 
         <table class="calendar__table--<?= $weeks; ?> weeks">
-            <?php for ($i = 0; $i < $month->getWeeks(); $i++){ ?>
+            <?php for ($i = 0; $i < $weeks; $i++): ?>
                 <tr>
                     <?php 
-                    foreach($month->days as $k => $day){ 
+                    foreach($month->days as $k => $day):
                         $date = (clone $start)->modify( modifier:"+" . ($k + $i * 7) . "days");
                         $eventsForDay = $events[$date->format(format:'Y-m-d')] ?? [];
                     ?>
                     <td class="<?= $month->withinMonth($date) ? '' : 'calendar__othermonth'; ?>">
-                        <?php if ($i === 0){ ?>
-                            <div class="calendar__weekday"><?= $day; ?></div>
-                        <?php }?>
-                            <div class="calendar__day"><?= $date->format(format:'d'); ?></div>
-                        <?php foreach($eventsForDay as $event){ ?> 
-                            <div class="calendar__event">
-                                <?= (new DateTime( $event['debut']))->format(format:'H:i') ?> - <a href="./reservation.php?id=<?= $event['id'];
-                                ?>"> <?= h($event['titre']); ?></a>
-                            </div>
-                        <?php } ?>
-                    </td>
-                    <?php } ?>
+                            <?php if ($i === 0): ?>
+                                <div class="calendar__weekday"><?= $day; ?></div>
+                            <?php endif;?>
+                                <div class="calendar__day"><?= $date->format(format:'d'); ?></div>
+                            <?php foreach($eventsForDay as $event): ?> 
+                                <div class="calendar__event">
+                                    <?= (new DateTime($event['debut']))->format(format:'H:i') ?> - <a href="./reservation.php?id=<?= $event['id'];
+                                    ?>"><?= h($event['titre']); ?></a>
+                                </div>
+                            <?php endforeach; ?>
+                        </td>
+                    <?php endforeach; ?>
+                </td>
+            <?php endfor; ?>
                 </tr>
-            <?php } ?>
+            <?php  ?>
         </table>
     </main>
     <footer>
