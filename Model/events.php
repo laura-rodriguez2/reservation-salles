@@ -16,7 +16,7 @@ class Events{
      * @return array
      */
     public function getEventsBetween(\DateTime $debut, \DateTime $end): array{
-        $pdo = new \PDO('mysql:host=localhost;dbname=reservationsalles;charset=utf8', 'root', '', [
+        $this->pdo = new \PDO('mysql:host=localhost;dbname=reservationsalles;charset=utf8', 'root', '', [
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
             \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
         ]);
@@ -52,17 +52,25 @@ class Events{
      * @return Event
      * @throws \Exception
      */
-    public function find (int $id): Event {
-        require 'event.php';
-        $statement = $this->pdo->query(statement: "SELECT * FROM reservations WHERE id = $id LIMIT 1");
-        $statement-> setFetchMode(mode:\PDO::FETCH_CLASS, classNameObject: \Model\Event::class);
-        $result = $statement->fetch();
-        if($result === false) {
-            throw new \Exception(message: 'Aucun résultat n\'a été trouvé');
-        }
-        return $result;
-    }
+  
 
+    public function find (int $id) {
+        require 'event.php';
+    if (isset($_GET['id']) and !empty($_GET['id'])) {
+        // $get_id = htmlspecialchars($_GET['id']);
+        $article = $this->pdo->prepare('SELECT * FROM reservations WHERE id = ?');
+        $article->execute(array($id));
+        if ($article->rowCount() == 1) {
+            $article = $article->fetch();
+            $titre = $article['titre'];
+            $contenu = $article['description'];
+        } else {
+            die('Cet article n\'existe pas !');
+        }
+    } else {
+        die('Erreur');
+    }
+}
     // public function find (int $id): Event {
     //     require 'event.php';
     //     $statement = $this->pdo->prepare("SELECT * FROM reservation WHERE id = $id LIMIT 1");

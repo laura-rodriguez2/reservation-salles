@@ -57,6 +57,7 @@ public function register($login, $password){
     }
 }
 
+
 // public function connect($_login, $_password) {
 
 //     $_login = htmlspecialchars($_login);
