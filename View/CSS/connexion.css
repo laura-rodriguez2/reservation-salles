@@ -1,0 +1,24 @@
+body{
+    background-image: url(../MEDIAS/fondcercle.jpg);
+}
+main {
+    background-color: rgba(0, 0, 0, 0.582);
+    color:blanchedalmond;
+    margin: 10%;
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+    }
+
+    .box-input{
+        margin-bottom: 2%;
+        
+    }
+    .text{
+        margin-bottom: 9%;
+    }
+    
+    #form_inscription{
+        display: flex;
+        flex-direction: column;
+    }

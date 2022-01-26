@@ -55,11 +55,11 @@ if(isset($_POST['formconnexion']))
     <main>
     <div id="deplacement_form"> 
             <form id="form_inscription" method="POST" action=""> 
-                <h1 class="lr_h2">Connexion</h1><br>
-                <input type="text" class="box-input" name="loginconnect" placeholder="Login"><br>
-                <input type="password" class="box-input" name="passwordconnect" placeholder="Password"><br><br>
-                <input type="submit" class="btn btn-secondary btn-lg" name="formconnexion" value="Se connecter !"><br><br>
-                <p class="lr_h2">Vous n'avez pas de compte? <a id="color_link" href="inscription.php">Inscrivez-vous ici</a></p> 
+                <h1>Connexion :</h1><br>
+                <input type="text" class="box-input" name="loginconnect" placeholder="Login">
+                <input type="password" class="text" name="passwordconnect" placeholder="Password">
+                <input type="submit" class="btn btn-secondary btn-lg" name="formconnexion" value="Se connecter !">
+                <p class="lr_h2">Vous n'avez pas de compte ? <a id="color_link" href="inscription.php">Inscrivez-vous ici</a></p> 
             </form>
         </div>    
     </main>

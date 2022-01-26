@@ -30,12 +30,12 @@ if (isset($_POST['submit'])){
     <main>
     <div id="pasdenom">
                 <form id="form_inscription" action="" method="POST">
-                    <h1 class="lr_h2">S'inscrire</h1>
-                        <input type="text" class="box-input" name="login" placeholder="Login" required />
-                        <input type="password" class="box-input" name="password" placeholder="Mot de passe" required />
+                    <h1>S'inscrire :</h1>
+                        <input class="box-input" type="text" name="login" placeholder="Login" required />
+                        <input class="box-input" type="password" name="password" placeholder="Mot de passe" required />
                         <input class="text" type="password" name="password2" placeholder="Confirmation du mot de passe" required="">
-                        <input type="submit" name="submit" value="S'inscrire" class="btn btn-secondary btn-lg" /> 
-                        <p class="lr_h2">Déjà inscrit? <a id="color_link" href="connexion.php">Connectez-vous ici</a></p> 
+                        <input class="btn btn-secondary btn-lg" type="submit" name="submit" value="S'inscrire" /> 
+                        <p class="lr_h2">Déjà inscrit ? <a id="color_link" href="connexion.php">Connectez-vous ici</a></p> 
                 </form>
             </div>
     </main>
