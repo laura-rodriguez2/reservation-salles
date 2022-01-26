@@ -41,7 +41,7 @@ session_start();
         </nav>
 
         <table class="calendar__table--<?= $weeks; ?> weeks">
-            <?php for ($i = 0; $i < $weeks; $i++){ ?>
+            <?php for ($i = 0; $i < $month->getWeeks(); $i++){ ?>
                 <tr>
                     <?php 
                     foreach($month->days as $k => $day){ 
