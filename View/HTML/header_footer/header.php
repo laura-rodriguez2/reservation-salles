@@ -19,20 +19,13 @@ require('../../Model/bdd.php');
         <nav>  
             <div class="lr_nav_header">
                 <img src="../MEDIAS/vr_universe.png" width="15%">
-<<<<<<< HEAD
-                <li><a class="lr_li_header" href="index.php"> Accueil</a></li>
-                <li><a class="lr_li_header" href="planning.php"> Planning</a></li>
-                <li><a class="lr_li_header" href="reservation-form.php"> Réservation</a></li>
-                <li><a class="lr_li_header" href="deconnexion.php"> Déconnexion</a></li> 
-=======
             </div>
-        <ul class="lr_li_header">
-                <li><a href="index.php"> Accueil</a></li>
-                <li><a href="planning.php"> Planning</a></li>
-                <li><a href="reservation-form.php"> Réservation</a></li>
-                <li><a href="profil.php"> Profil </a></li>
-                <li><a href="deconnexion.php"> Déconnexion</a></li> 
->>>>>>> alex
+            <ul class="lr_li_header">
+                <li><a class="al_header_color" href="index.php"> Accueil</a></li>
+                <li><a class="al_header_color" href="planning.php"> Planning</a></li>
+                <li><a class="al_header_color" href="reservation-form.php"> Réservation</a></li>
+                <li><a class="al_header_color" href="profil.php"> Profil </a></li>
+                <li><a class="al_header_color" href="deconnexion.php"> Déconnexion</a></li> 
             </ul>
         </nav>
         <?php 
@@ -40,13 +33,12 @@ require('../../Model/bdd.php');
         ?>
         <nav>
             <div class="lr_nav_header">
-            <img src="../MEDIAS/vr_universe.png" width="15%">
-            </div>
+                <img src="../MEDIAS/vr_universe.png" width="15%">
             <ul class="lr_li_header">
-                <li><a href="index.php"> Accueil</a></li>
-                <li><a href="planning.php"> Planning</a></li>
-                <li><a href="inscription.php"> Inscription</a></li>
-                <li><a href="connexion.php"> Connexion</a></li> 
+                <li><a class="al_header_color" href="index.php"> Accueil</a></li>
+                <li><a class="al_header_color" href="planning.php"> Planning</a></li>
+                <li><a class="al_header_color" href="inscription.php"> Inscription</a></li>
+                <li><a class="al_header_color" href="connexion.php"> Connexion</a></li> 
             </ul>
         
         </nav>
