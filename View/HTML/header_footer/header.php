@@ -21,26 +21,22 @@ require('../../Model/bdd.php');
                 <img src="../MEDIAS/vr_universe.png" width="15%">
             </div>
             <ul class="lr_li_header">
-                <li><a class="al_header_color" href="index.php"> Accueil</a></li>
-                <li><a class="al_header_color" href="planning.php"> Planning</a></li>
-                <li><a class="al_header_color" href="reservation-form.php"> Réservation</a></li>
-                <li><a class="al_header_color" href="profil.php"> Profil </a></li>
-                <li><a class="al_header_color" href="deconnexion.php"> Déconnexion</a></li> 
+                <a class="al_header_color" href="index.php"> Accueil</a>
+                <a class="al_header_color" href="planning.php"> Planning</a>
+                <a class="al_header_color" href="reservation-form.php"> Réservation</a>
+                <a class="al_header_color" href="profil.php"> Profil </a>
+                <a class="al_header_color" href="deconnexion.php"> Déconnexion</a> 
             </ul>
         </nav>
         <?php 
             } else{ 
         ?>
-        <nav>
-            <div class="lr_nav_header">
                 <img src="../MEDIAS/vr_universe.png" width="15%">
-            <ul class="lr_li_header">
-                <li><a class="al_header_color" href="index.php"> Accueil</a></li>
-                <li><a class="al_header_color" href="planning.php"> Planning</a></li>
-                <li><a class="al_header_color" href="inscription.php"> Inscription</a></li>
-                <li><a class="al_header_color" href="connexion.php"> Connexion</a></li> 
-            </ul>
-        
+        <nav class=position_nav>
+                <a class="al_header_color" href="index.php"> Accueil</a>
+                <a class="al_header_color" href="planning.php"> Planning</a>
+                <a class="al_header_color" href="inscription.php"> Inscription</a>
+                <a class="al_header_color" href="connexion.php"> Connexion</a>
         </nav>
         <?php 
             }

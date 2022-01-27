@@ -16,13 +16,8 @@
             0 0 92px #0fa,
             0 0 102px #0fa,
             0 0 151px #0fa; */ 
-    font-size: 150%;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    display: flex;
-    margin-left: 5%;
     
-    flex-direction: row;
-    justify-content: space-around;
+  
 }
 .al_header_color{
     text-decoration: none; 
@@ -36,11 +31,21 @@
         0 0 92px #0fa,
         0 0 102px #0fa,
         0 0 151px #0fa;
+    font-size: 150%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .lr_li_header:hover{
     color: rgb(81, 50, 255);
 }
 .al_header{
     background-color: rgb(24, 24, 24,.8);
-margin: 0%;
+    margin: 0%;
+}
+.position_nav{
+    display: flex;
+    margin-left: 15%;
+    /* flex-direction: row; */
+    /* justify-content: space-around; */
+    /* display: table; */
+
 }
