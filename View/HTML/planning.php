@@ -13,9 +13,10 @@ $end = (clone $start)->modify(modifier: '+' . (6 + 7 * ($weeks - 1)) . 'days');
 $events = $events->getEventsBetweenByDay($start, $end);
 
 
+
 $year = (isset($_GET['year'])) ? $_GET['year'] : date("Y");
 $week = (isset($_GET['week'])) ? $_GET['week'] : date('W');
-$hour = (isset($_GET['hour'])) ? $_GET['hour'] : date("h");
+// $hour = (isset($_GET['hour'])) ? $_GET['hour'] : date("h");
 
 if ($week > 52) {   //52 semaines dans l'année donc après 52 passer à l'année suivante
     $year++;
@@ -61,30 +62,53 @@ if ($week > 52) {   //52 semaines dans l'année donc après 52 passer à l'anné
         </thead> -->
         <table border="1px">
             <thead>
-                <tr> 
-                    <td>Heures/Jours</td>
+                <tr>
+                    <th>
+                        Heures/Jours </th>
                     <?php
-
+                    $eventsForDay = $events ?? [];
                     if ($week < 10) {
                         $week = '0' . $week;
                     }
-                    for ($day = 1; $day <= 7; $day++) {
+                    for ($day = 1; $day <= 7; $day++) {      /* Afficher la date */
                         $d = strtotime($year . "W" . $week . $day);
 
                         echo "<td>" . date('l', $d) . "<br>" . date('d M', $d) . "</td>";
-                    } ?> </tr>
+                    } ?>
+                </tr>
             </thead>
             <tbody>
                 <?php for ($hour = 8; $hour <= 19; $hour++) { ?>
+                    <!-- Afficher les horaires  -->
                     <tr>
-                        <td><?= $hour;
-                            echo 'H00' ?> </td>
-                    </tr>
-                <?php }
-                ?>
+                        <td>
+                            <?= $hour;
+                            echo 'H00' ?>
+                        </td>
+                    <tr>
+                    <?php
+                }
+                    ?>
 
-              
-               
+                    <?php /*   A VOIR AFFICHE LES RESERVATIONS MNT IL FAUT ARRIVER A LES AFFICHER AUX BON HORAIRES :'(
+
+$result = $pdo->query('SELECT titre FROM reservations');
+$reservation = $result->fetchAll(PDO::FETCH_ASSOC);
+$total_reservation = $result->rowCount();
+
+$i = 0;
+foreach ($reservation as $reserv) {
+?>
+<tr>
+    <td><?php echo $reserv['titre']; ?></td>
+</tr>
+<?php
+    $cpt++;
+} */
+                    ?>
+
+
+
             </tbody>
         </table>
     </main>
