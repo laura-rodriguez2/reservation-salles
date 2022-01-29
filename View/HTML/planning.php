@@ -7,7 +7,7 @@ $pdo = get_pdo();
 $events = new \Model\Events($pdo);
 $month = new Month(month: $_GET['month'] ?? null, year: $_GET['year'] ?? null);
 $start = $month->getFirstDay();
-$start = $start->format(format: 'N') === '1' ? $start : $month->getFirstDay()->modify(modifier:'last monday'); 
+$start = $start->format(format: 'N') === '1' ? $start : $month->getFirstDay()->modify(modifier: 'last monday');
 $weeks = $month->getWeeks();
 $end = (clone $start)->modify(modifier: '+' . (6 + 7 * ($weeks - 1)) . 'days');
 $events = $events->getEventsBetweenByDay($start, $end);
@@ -15,10 +15,12 @@ $events = $events->getEventsBetweenByDay($start, $end);
 
 $year = (isset($_GET['year'])) ? $_GET['year'] : date("Y");
 $week = (isset($_GET['week'])) ? $_GET['week'] : date('W');
-if ($week > 52) {   //pour passer à l'année suivante
+$hour = (isset($_GET['hour'])) ? $_GET['hour'] : date("h");
+
+if ($week > 52) {   //52 semaines dans l'année donc après 52 passer à l'année suivante
     $year++;
     $week = 1;
-} elseif ($week < 1) {  //pour passer à l'année précédente
+} elseif ($week < 1) {  //là pour passer à l'année précédente
     $year--;
     $week = 52;
 }
@@ -42,31 +44,48 @@ if ($week > 52) {   //pour passer à l'année suivante
 
     <main>
         <!--Passer à la semaine précédente ou à la suivante -->
-        <a href="<?php echo $_SERVER['PHP_SELF'] . '?week=' . ($week == 1 ? 52 : $week - 1) . '&year=' . ($week == 1 ? $year - 1 : $year); ?>"class="btn btn-info">&lt;</a>
-        <a href="<?php echo $_SERVER['PHP_SELF'] . '?week=' . ($week == 52 ? 1 : 1 + $week) . '&year=' . ($week == 52 ? 1 + $year : $year); ?>"class="btn btn-info">&gt;</a>
-        <a href="reservation-form.php" class="btn btn-info add_reserv">Réserver</a> 
+        <a href="<?php echo $_SERVER['PHP_SELF'] . '?week=' . ($week == 1 ? 52 : $week - 1) . '&year=' . ($week == 1 ? $year - 1 : $year); ?>" class="btn btn-info">&lt;</a>
+        <a href="<?php echo $_SERVER['PHP_SELF'] . '?week=' . ($week == 52 ? 1 : 1 + $week) . '&year=' . ($week == 52 ? 1 + $year : $year); ?>" class="btn btn-info">&gt;</a>
+        <a href="reservation-form.php" class="btn btn-info add_reserv">Réserver</a>
 
+
+        <!-- <thead>
+                    <tr>
+                        <th>Heures/Jours</th>
+                        <th>Lundi</th>
+                        <th>Mardi</th>
+                        <th>Mercredi</th>
+                        <th>Jeudi</th>
+                        <th>Vendredi</th>
+                    </tr>
+        </thead> -->
         <table border="1px">
-            <tr>
-                <td>Employee</td>
-                <?php
-                if ($week < 10) {
-                    $week = '0' . $week;
-                }
-                for ($day = 1; $day <= 7; $day++) {
-                    $d = strtotime($year . "W" . $week . $day);
+            <thead>
+                <tr> 
+                    <td>Heures/Jours</td>
+                    <?php
 
-                    echo "<td>" . date('l', $d) . "<br>" . date('d M', $d) . "</td>";
-                }
-                
-               foreach($eventsForDay as $event): ?> 
-                    <div class="calendar__event">
-                        <?= (new DateTime($event['debut']))->format(format:'H:i') ?> - <a href="./reservation.php?id=<?= $event['id'];
-                        ?>"><?= h($event['titre']); ?></a>
-                    </div>
-                <?php endforeach; ?>
+                    if ($week < 10) {
+                        $week = '0' . $week;
+                    }
+                    for ($day = 1; $day <= 7; $day++) {
+                        $d = strtotime($year . "W" . $week . $day);
+
+                        echo "<td>" . date('l', $d) . "<br>" . date('d M', $d) . "</td>";
+                    } ?> </tr>
+            </thead>
+            <tbody>
+                <?php for ($hour = 8; $hour <= 19; $hour++) { ?>
+                    <tr>
+                        <td><?= $hour;
+                            echo 'H00' ?> </td>
+                    </tr>
+                <?php }
+                ?>
+
+              
                
-            </tr>
+            </tbody>
         </table>
     </main>
     <footer>
