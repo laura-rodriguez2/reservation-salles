@@ -4,15 +4,12 @@ require '../../Model/bdd.php';
 require '../../Model/Month.php'; //Contient les fonctions pour faire le calendrier
 require '../../Model/events.php'; //Contient les fonctions permettant d'afficher les réservations
 $pdo = get_pdo();
-$events = new \Model\Events($pdo);
-$month = new Month(month: $_GET['month'] ?? null, year: $_GET['year'] ?? null);
-$start = $month->getFirstDay();
-$start = $start->format(format: 'N') === '1' ? $start : $month->getFirstDay()->modify(modifier: 'last monday');
-$weeks = $month->getWeeks();
-$end = (clone $start)->modify(modifier: '+' . (6 + 7 * ($weeks - 1)) . 'days');
-$events = $events->getEventsBetweenByDay($start, $end);
 
-
+$sql = "SELECT reservations.id, titre, description, debut, fin, id_utilisateur , utilisateurs.login FROM `reservations` 
+INNER JOIN utilisateurs ON reservations.id_utilisateur = utilisateurs.id  "; // inner join de la table reservations et utilisateur via les id des 2 tables
+$prep = $pdo->prepare($sql);
+$prep->execute();
+$reservations = $prep->fetchAll(PDO::FETCH_ASSOC);
 
 $year = (isset($_GET['year'])) ? $_GET['year'] : date("Y");
 $week = (isset($_GET['week'])) ? $_GET['week'] : date('W');
@@ -66,7 +63,6 @@ if ($week > 52) {   //52 semaines dans l'année donc après 52 passer à l'anné
                     <th>
                         Heures/Jours </th>
                     <?php
-                    $eventsForDay = $events ?? [];
                     if ($week < 10) {
                         $week = '0' . $week;
                     }
@@ -88,23 +84,6 @@ if ($week > 52) {   //52 semaines dans l'année donc après 52 passer à l'anné
                     <tr>
                     <?php
                 }
-                    ?>
-
-                    <?php /*   A VOIR AFFICHE LES RESERVATIONS MNT IL FAUT ARRIVER A LES AFFICHER AUX BON HORAIRES :'(
-
-$result = $pdo->query('SELECT titre FROM reservations');
-$reservation = $result->fetchAll(PDO::FETCH_ASSOC);
-$total_reservation = $result->rowCount();
-
-$i = 0;
-foreach ($reservation as $reserv) {
-?>
-<tr>
-    <td><?php echo $reserv['titre']; ?></td>
-</tr>
-<?php
-    $cpt++;
-} */
                     ?>
 
 
