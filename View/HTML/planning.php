@@ -58,10 +58,10 @@ if ($week > 52) {   //52 semaines dans l'année donc après 52 passer à l'anné
                     </tr>
         </thead> -->
         <table border="1px">
-            <thead>
                 <tr>
                     <th>
-                        Heures/Jours </th>
+                        Heures/Jours
+                    </th>
                     <?php
                     if ($week < 10) {
                         $week = '0' . $week;
@@ -71,9 +71,8 @@ if ($week > 52) {   //52 semaines dans l'année donc après 52 passer à l'anné
 
                         echo "<td>" . date('l', $d) . "<br>" . date('d M', $d) . "</td>";
                     } ?>
-                </tr>
-            </thead>
-            <tbody>
+               
+
                 <?php for ($hour = 8; $hour <= 19; $hour++) { ?>
                     <!-- Afficher les horaires  -->
                     <tr>
@@ -84,11 +83,14 @@ if ($week > 52) {   //52 semaines dans l'année donc après 52 passer à l'anné
                     <tr>
                     <?php
                 }
+                
                     ?>
+                      <?php if ($i === 0){ ?>
+                            <div class="calendar__weekday"><?= 'test'; ?></div>
+                        <?php }?>
+ </tr>
 
 
-
-            </tbody>
         </table>
     </main>
     <footer>
