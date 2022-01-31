@@ -5,11 +5,24 @@ require '../../Model/Month.php'; //Contient les fonctions pour faire le calendri
 require '../../Model/events.php'; //Contient les fonctions permettant d'afficher les réservations
 $pdo = get_pdo();
 
-$sql = "SELECT reservations.id, titre, description, debut, fin, id_utilisateur , utilisateurs.login FROM `reservations` 
-INNER JOIN utilisateurs ON reservations.id_utilisateur = utilisateurs.id  "; // inner join de la table reservations et utilisateur via les id des 2 tables
-$prep = $pdo->prepare($sql);
-$prep->execute();
-$reservations = $prep->fetchAll(PDO::FETCH_ASSOC);
+// $sql = "SELECT reservations.id, titre, description, debut, fin, id_utilisateur , utilisateurs.login FROM `reservations` 
+// INNER JOIN utilisateurs ON reservations.id_utilisateur = utilisateurs.id  "; // inner join de la table reservations et utilisateur via les id des 2 tables
+// $prep = $pdo->prepare($sql);
+// $prep->execute();
+// $reservations = $prep->fetchAll(PDO::FETCH_ASSOC);
+
+// $NbrCol = 19;
+// $NbrLigne = 19;
+
+// echo '<table border="1" width="400">';
+// // 1ere ligne (ligne 0)
+//    echo '<tr>';
+//    echo '<td bgcolor="#CCCCCC">i X j</td>';
+//    for ($j=1; $j<=$NbrCol; $j++) {
+//       echo '<td bgcolor="#FFFF66">'.$j.'</td>';
+//    }
+//    echo '</tr>';
+
 
 $year = (isset($_GET['year'])) ? $_GET['year'] : date("Y");
 $week = (isset($_GET['week'])) ? $_GET['week'] : date('W');
@@ -58,38 +71,50 @@ if ($week > 52) {   //52 semaines dans l'année donc après 52 passer à l'anné
                     </tr>
         </thead> -->
         <table border="1px">
-                <tr>
-                    <th>
-                        Heures/Jours
-                    </th>
-                    <?php
-                    if ($week < 10) {
-                        $week = '0' . $week;
-                    }
-                    for ($day = 1; $day <= 7; $day++) {      /* Afficher la date */
-                        $d = strtotime($year . "W" . $week . $day);
-
-                        echo "<td>" . date('l', $d) . "<br>" . date('d M', $d) . "</td>";
-                    } ?>
-               
-
-                <?php for ($hour = 8; $hour <= 19; $hour++) { ?>
-                    <!-- Afficher les horaires  -->
-                    <tr>
-                        <td>
-                            <?= $hour;
-                            echo 'H00' ?>
-                        </td>
-                    <tr>
-                    <?php
-                }
-                
-                    ?>
-                      <?php if ($i === 0){ ?>
-                            <div class="calendar__weekday"><?= 'test'; ?></div>
-                        <?php }?>
- </tr>
-
+        <?php
+// $NbrCol : le nombre de colonnes
+// $NbrLigne : le nombre de lignes
+$NbrCol = 7;
+$NbrLigne = 19;
+// --------------------------------------------------------
+// on affiche en plus sur les 1ere ligne et 1ere colonne 
+// les valeurs a multiplier (dans des cases en couleur)
+// le tableau fera donc 10 x 10
+// --------------------------------------------------------
+echo '<table border="1" width="400">';
+// 1ere ligne (ligne 0)
+   echo '<tr>';
+   echo '<td>Heures/Jours</td>';
+   for ($j=1; $j<=$NbrCol; $j++) {
+      echo '<td>'.$j.'</td>';
+   }
+   echo '</tr>';
+// -------------------------------------------------------
+// lignes suivantes
+for ($i=8; $i<=$NbrLigne; $i++) {
+   echo '<tr>';
+   for ($j=1; $j<=$NbrCol; $j++) {
+       // 1ere colonne (colonne 0)
+      if ($j==1) {
+         echo '<td>'.$i.'</td>';
+      }
+       // colonnes suivantes
+         if ($i==$j) {
+            echo '<td bgcolor="#FFCC66">';
+         } else {
+            echo '<td>';
+         }
+       // ------------------------------------------
+       // AFFICHAGE ligne $i, colonne $j
+      echo "<a href='reservation-form.php'>Réserver</a>";
+       // ------------------------------------------
+      echo '</td>';
+   }
+   echo '</tr>';
+   $j=1;
+}
+echo '</table>';
+?>
 
         </table>
     </main>
