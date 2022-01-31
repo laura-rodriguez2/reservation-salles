@@ -74,8 +74,12 @@ if ($week > 52) {   //52 semaines dans l'année donc après 52 passer à l'anné
             <?php
             // $NbrCol : le nombre de colonnes
             // $NbrLigne : le nombre de lignes
-            $NbrCol = 7;
-            $NbrLigne = 19;
+            // $NbrCol = 8; //en haut les jours
+            $NbrCol = array('Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedie','Dimanche');
+            // $NbrLigne = 19;
+            $NbrLigne = 19; //a droite les heures
+
+
             // --------------------------------------------------------
             // on affiche en plus sur les 1ere ligne et 1ere colonne 
             // les valeurs a multiplier (dans des cases en couleur)
@@ -86,7 +90,7 @@ if ($week > 52) {   //52 semaines dans l'année donc après 52 passer à l'anné
             echo '<tr>';
             echo '<td>Heures/Jours</td>';
             for ($j = 1; $j <= $NbrCol; $j++) { 
-                $d = strtotime($year . "W" . $week . $j); //ICI
+                // $d = strtotime($year . "W" . $week . $j); //ICI
 
                 echo '<td>' . $j . '</td>';
             }
@@ -95,7 +99,7 @@ if ($week > 52) {   //52 semaines dans l'année donc après 52 passer à l'anné
             // lignes suivantes
             for ($i = 8; $i <= $NbrLigne; $i++) {
                 echo '<tr>';
-                for ($j = 1; $j <= $NbrCol; $j++) {
+                for($i = 7; $i < count($NbrCol); ++$i) {
 
                     // 1ere colonne (colonne 0)
                     if ($j == 1) {
