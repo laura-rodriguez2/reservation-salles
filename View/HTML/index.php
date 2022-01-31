@@ -19,7 +19,7 @@ session_start();
         <main>
             <div class="al_scroll-snap">
                 <div class="al_bloc">
-                    <img src="../MEDIAS/fond1.png">
+                    <img class="image" src="../MEDIAS/fond1.png">
                 </div>
                 <div class="al_bloc">
                     <h1>bloc2</h1>
