@@ -75,8 +75,8 @@ if ($week > 52) {   //52 semaines dans l'année donc après 52 passer à l'anné
             // $NbrCol : le nombre de colonnes
             // $NbrLigne : le nombre de lignes
             // $NbrCol = 7; //en haut les jours
-            $NbrCol = array('Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche');
-            $array=count($NbrCol);
+            $NbrCol = array('Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche');
+            $array = count($NbrCol);
 
             // $NbrLigne = 19;
             $NbrLigne = 19; //a droite les heures
@@ -91,18 +91,19 @@ if ($week > 52) {   //52 semaines dans l'année donc après 52 passer à l'anné
             // 1ere ligne (ligne 0)
             echo '<tr>';
             echo '<td>Heures/Jours</td>';
-            for ($j = 1; $j <= $array; $j++) { 
-                // $d = strtotime($year . "W" . $week . $j); //ICI
-                    //
-                echo '<td>' . $j . '</td>';
-                    //
-                    // echo '<td>Lundi</td>';
-                    // echo '<td>Mardi</td>';
-                    // echo '<td>Mercredi</td>';
-                    // echo '<td>Jeudi</td>';
-                    // echo '<td>Vendredi</td>';
-                    // echo '<td>Samedi</td>';
-                    // echo '<td>Dimanche</td>';
+            // for () { 
+            // $d = strtotime($year . "W" . $week . $j); //ICI
+            //
+            foreach ($NbrCol as $k) {
+                echo '<td>' . $k . '</td>';
+                //
+                // echo '<td>Lundi</td>';
+                // echo '<td>Mardi</td>';
+                // echo '<td>Mercredi</td>';
+                // echo '<td>Jeudi</td>';
+                // echo '<td>Vendredi</td>';
+                // echo '<td>Samedi</td>';
+                // echo '<td>Dimanche</td>';
             }
             echo '</tr>';
             // -------------------------------------------------------
@@ -113,7 +114,7 @@ if ($week > 52) {   //52 semaines dans l'année donc après 52 passer à l'anné
 
                     // 1ere colonne (colonne 0)
                     if ($j == 1) {
-                        
+
                         echo '<td>' . $i . 'H00</td>'; //HEURES
                     }
                     // colonnes suivantes
