@@ -1,4 +1,5 @@
 <?php
+session_start();
 require('../../Model/bdd.php');
 require('../../Model/utilisateurs.php');
 if (isset($_POST['submit'])){
