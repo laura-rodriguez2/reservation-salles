@@ -53,3 +53,10 @@ table td {
     text-decoration: none;
     color: rgb(126, 241, 241);
 }
+::-webkit-scrollbar{
+    width: 10px;
+    background-color: rgb(183, 21, 189);
+}
+::-webkit-scrollbar-thumb{
+    background-color: rgb(81, 50, 255);
+}
