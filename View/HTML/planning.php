@@ -71,50 +71,54 @@ if ($week > 52) {   //52 semaines dans l'année donc après 52 passer à l'anné
                     </tr>
         </thead> -->
         <table border="1px">
-        <?php
-// $NbrCol : le nombre de colonnes
-// $NbrLigne : le nombre de lignes
-$NbrCol = 7;
-$NbrLigne = 19;
-// --------------------------------------------------------
-// on affiche en plus sur les 1ere ligne et 1ere colonne 
-// les valeurs a multiplier (dans des cases en couleur)
-// le tableau fera donc 10 x 10
-// --------------------------------------------------------
-echo '<table border="1" width="400">';
-// 1ere ligne (ligne 0)
-   echo '<tr>';
-   echo '<td>Heures/Jours</td>';
-   for ($j=1; $j<=$NbrCol; $j++) {
-      echo '<td>'.$j.'</td>';
-   }
-   echo '</tr>';
-// -------------------------------------------------------
-// lignes suivantes
-for ($i=8; $i<=$NbrLigne; $i++) {
-   echo '<tr>';
-   for ($j=1; $j<=$NbrCol; $j++) {
-       // 1ere colonne (colonne 0)
-      if ($j==1) {
-         echo '<td>'.$i.'</td>';
-      }
-       // colonnes suivantes
-         if ($i==$j) {
-            echo '<td bgcolor="#FFCC66">';
-         } else {
-            echo '<td>';
-         }
-       // ------------------------------------------
-       // AFFICHAGE ligne $i, colonne $j
-      echo "<a href='reservation-form.php'>Réserver</a>";
-       // ------------------------------------------
-      echo '</td>';
-   }
-   echo '</tr>';
-   $j=1;
-}
-echo '</table>';
-?>
+            <?php
+            // $NbrCol : le nombre de colonnes
+            // $NbrLigne : le nombre de lignes
+            $NbrCol = 7;
+            $NbrLigne = 19;
+            // --------------------------------------------------------
+            // on affiche en plus sur les 1ere ligne et 1ere colonne 
+            // les valeurs a multiplier (dans des cases en couleur)
+            // le tableau fera donc 10 x 10
+            // --------------------------------------------------------
+            // echo '<table border="1" width="400">';
+            // 1ere ligne (ligne 0)
+            echo '<tr>';
+            echo '<td>Heures/Jours</td>';
+            for ($j = 1; $j <= $NbrCol; $j++) { 
+                $d = strtotime($year . "W" . $week . $j); //ICI
+
+                echo '<td>' . $j . '</td>';
+            }
+            echo '</tr>';
+            // -------------------------------------------------------
+            // lignes suivantes
+            for ($i = 8; $i <= $NbrLigne; $i++) {
+                echo '<tr>';
+                for ($j = 1; $j <= $NbrCol; $j++) {
+
+                    // 1ere colonne (colonne 0)
+                    if ($j == 1) {
+                        
+                        echo '<td>' . $i . 'H00</td>'; //HEURES
+                    }
+                    // colonnes suivantes
+                    if ($i == $j) {
+                        echo '<td bgcolor="#FFCC66">';
+                    } else {
+                        echo '<td>';
+                    }
+                    // ------------------------------------------
+                    // AFFICHAGE ligne $i, colonne $j
+                    echo "<a href='reservation-form.php'>Réserver</a>"; //CASES RESERVER
+                    // ------------------------------------------
+                    echo '</td>';
+                }
+                echo '</tr>';
+                $j = 1;
+            }
+            // echo '</table>';
+            ?>
 
         </table>
     </main>
