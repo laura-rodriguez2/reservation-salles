@@ -42,11 +42,14 @@ $events = $events->getEventsBetweenByDay($start, $end);
         <table class="calendar__table--<?= $weeks; ?> weeks">
             <?php for ($i = 0; $i < $weeks; $i++) : ?>
                 <tr>
+                <td>AFFICHER HEURES ICI SVP FAITES QUE CA MARCHE</td> 
+
                     <?php
                     foreach ($month->days as $k => $day) :
                         $date = (clone $start)->modify(modifier: "+" . ($k + $i * 7) . "days");
                         $eventsForDay = $events[$date->format(format: 'Y-m-d')] ?? [];
                     ?>
+                    
                         <td class="<?= $month->withinMonth($date) ? '' : 'calendar__othermonth'; ?>">
                             <?php if ($i === 0) : ?>
                                 <div class="calendar__weekday"><?= $day ?></div>
