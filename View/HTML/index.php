@@ -19,15 +19,17 @@ session_start();
         <main>
             <div class="al_scroll-snap">
                 <div class="al_bloc">
-                    <img class="image" src="../MEDIAS/fond1.png">
+                    <img class="image" src="../MEDIAS/fond1-2.0.png">
                 </div>
                 <div class="al_bloc">
-                    <h1>bloc2</h1>
+                    <p>reserver ue salle pour nimporte quel evenements
+                    particulier voici la liste des meilleurs jeux 
+                    que nous pouvons vous proposer:</p> </br>
+                    <ul>
+                        <li>arizona sunshin</li>
+                        <li>drive club vr</li>
+                    </ul>
                 </div>
-                <div class="al_bloc">
-                    <h1>bloc3</h1>
-                </div>
-            </div>
         </main>
         <footer>
             <?php 

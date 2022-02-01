@@ -13,12 +13,16 @@ require('../../Model/bdd.php');
         <?php
             if(($_SESSION ==true)){
         ?>
-        <img src="../MEDIAS/vr_universe.png" width="15%">
+            <a href="index.php"><img src="../MEDIAS/vr_universe.png" href="./index.php"width="15%"></a>
+            <a class="al_header_color" href="index.php">Accueil</a>
+            <a class="al_header_color" href="planning.php">Planning</a>
+            <a class="al_header_color" href="reservation-form.php">Réservation</a>
+            <a class="al_header_color" href="deconnexion.php">Déconnexion</a>
         <?php
             }else{
         ?>
-            <img src="../MEDIAS/vr_universe.png" width="15%">
-            <a class="al_header_color" href="index.php">Acceuil</a>
+            <a href="index.php"><img src="../MEDIAS/vr_universe.png" href="./index.php"width="15%"></a>
+            <a class="al_header_color" href="index.php">Accueil</a>
             <a class="al_header_color" href="planning.php">Planning</a>
             <a class="al_header_color" href="inscription.php">Inscription</a>
             <a class="al_header_color" href="connexion.php">Connexion</a>
