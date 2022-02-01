@@ -40,6 +40,8 @@ if (isset($_POST['reserver'])) {
         ?>
     </header>
     <main>
+        <?php
+    if ($_SESSION == true){ ?>
         <div>
             <section>
                 <form action="reservation-form.php" method="POST">
@@ -59,6 +61,13 @@ if (isset($_POST['reserver'])) {
         </div>
         </section>
     </main>
+    <?php
+    }
+    else {
+    echo "Vous devez etre connecté pour reserver !";
+    echo "<a href='connexion.php'>Connexion</a>";
+    }
+    ?>
     <footer>
         <?php
         require_once('header_footer/footer.php');

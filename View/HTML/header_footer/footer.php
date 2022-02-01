@@ -1,7 +1,3 @@
-<?php
-require('../../Model/bdd.php');
-?>
-
 <!DOCTYPE html>
 <html>
 
