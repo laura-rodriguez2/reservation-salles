@@ -64,7 +64,7 @@ if (isset($_POST['reserver'])) {
     <?php
     }
     else {
-    echo "Vous devez etre connevté pour reserver !";
+    echo "Vous devez etre connecté pour reserver !";
     echo "<a href='connexion.php'>Connexion</a>";
     }
     ?>
