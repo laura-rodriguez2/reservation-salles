@@ -1,9 +1,13 @@
 body {
     background-image: url(../MEDIAS/triangle.jpg);
+    background-repeat: no-repeat;   
+    background-size:cover;
+    background-position-x: center;
+    background-attachment: fixed;
 }
 main{
     color: white;
-    margin: 10%;
+    margin: 6%;
     padding: 2%;
     display: flex;
     justify-content: center;
