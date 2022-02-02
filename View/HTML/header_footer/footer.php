@@ -13,7 +13,7 @@
             <ul class="lr_nav_footer">
                 <li><a class="lr_li_footer" href="https://github.com/laura-rodriguez2/reservation-salles.git">Github</a></li>
                 <li><a class="lr_li_footer" href="mentions.php">Mentions Légales</a></li>
-                <li><a class="lr_li_footer" href="">F.A.Q</a></li>
+                <li><a class="lr_li_footer" href="faq.php">F.A.Q</a></li>
             </ul>
         </nav>
     </footer>
