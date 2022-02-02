@@ -1,5 +1,13 @@
+header{
+    position: fixed;
+    width: 100%;
+}
 body {
-        background-image: url(../MEDIAS/triangle.jpg);
+    background-image: url(../MEDIAS/triangle.jpg);
+    background-repeat: no-repeat;   
+    background-size:cover;
+    background-position-x: center;
+    background-attachment: fixed;
 }
 
 main {
@@ -7,6 +15,7 @@ main {
     width: 100%;
     color: white;
     padding: 5%;
+    padding-top: 10%;
 }
 
 table{

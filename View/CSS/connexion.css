@@ -1,3 +1,8 @@
+header{
+    position: absolute;
+    width: 100%;
+}
+
 body{
     background-image: url(../MEDIAS/fondcercle.jpg);
 }
@@ -21,4 +26,11 @@ main {
     #form_inscription{
         display: flex;
         flex-direction: column;
-    }
+}
+
+footer{
+    /* position: fixed; */
+    position:absolute;
+    bottom:0;
+    width: 100%;
+}

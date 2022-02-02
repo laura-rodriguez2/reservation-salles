@@ -17,6 +17,7 @@ require('../../Model/bdd.php');
             <a class="al_header_color" href="index.php">Accueil</a>
             <a class="al_header_color" href="planning.php">Planning</a>
             <a class="al_header_color" href="reservation-form.php">Réservation</a>
+            <a class="al_header_color" href="profil.php">Profil</a>
             <a class="al_header_color" href="deconnexion.php">Déconnexion</a>
         <?php
             }else{
