@@ -43,26 +43,24 @@ $events = $events->getEventsBetweenByDay($start, $end);
             <?php for ($i = 0; $i < $weeks; $i++) : ?>
                 <tr>
                     <td>Heures/Jours</td>
-                <!-- <td>AFFICHER HEURES ICI SVP FAITES QUE CA MARCHE</td>  -->
-
                     <?php
                     foreach ($month->days as $k => $day) :
-                        $date = (clone $start)->modify(modifier: "+" . ($k + $i * 7) . "days");
+                        $date = (clone $start)->modify(modifier: "+" . ($k + $i * 7) . "days");   //regler mois
                         $eventsForDay = $events[$date->format(format: 'Y-m-d')] ?? [];
                     ?>
-                    
+
                         <td class="<?= $month->withinMonth($date) ? '' : 'calendar__othermonth'; ?>">
                             <?php if ($i === 0) : ?>
-                                <div class="calendar__weekday"><?= $day ?></div>
+                                <div class="calendar__weekday"><?= $day ?></div>  <? //afficher date (le jour) ?>
                             <?php endif; ?>
-                            
-                            
-                            <div class="calendar__day"><?= $date->format(format: 'd'); ?></div>
-                            
+
+
+                            <div class="calendar__day"><?= $date->format(format: 'd'); ?></div> <? //afficher date (le chiffre) ?>
+
                             <?php foreach ($eventsForDay as $event) : ?>
                                 <div class="calendar__event">
                                     <?= (new DateTime($event['debut']))->format(format: 'H:i') ?> - <a href="./reservation.php?id=<?= $event['id'];
-                                        ?>"><?= h($event['titre']); ?></a>
+                                                                                                                                    ?>"><?= h($event['titre']); ?></a>
                                 </div>
                             <?php endforeach; ?>
                         </td>
@@ -76,11 +74,13 @@ $events = $events->getEventsBetweenByDay($start, $end);
                             <?= $hour;
                             echo 'H00' ?>
                         </td>
+                    <?php
+                    echo '<td>ttttttttttttttt</td>';
+                }
+                    ?>
                     </tr>
-                <?php }
-                ?>
-                
-                <?php  ?>
+
+                    <?php  ?>
         </table>
     </main>
     <footer>
