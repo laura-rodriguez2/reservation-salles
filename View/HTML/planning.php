@@ -79,6 +79,7 @@ $events = $events->getEventsBetweenByDay($start, $end);
                     </tr>
                 <?php }
                 ?>
+                
                 <?php  ?>
         </table>
     </main>
