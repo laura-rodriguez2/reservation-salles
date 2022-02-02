@@ -42,7 +42,8 @@ $events = $events->getEventsBetweenByDay($start, $end);
         <table class="calendar__table--<?= $weeks; ?> weeks">
             <?php for ($i = 0; $i < $weeks; $i++) : ?>
                 <tr>
-                <td>AFFICHER HEURES ICI SVP FAITES QUE CA MARCHE</td> 
+                    <td>Heures/Jours</td>
+                <!-- <td>AFFICHER HEURES ICI SVP FAITES QUE CA MARCHE</td>  -->
 
                     <?php
                     foreach ($month->days as $k => $day) :
@@ -54,7 +55,10 @@ $events = $events->getEventsBetweenByDay($start, $end);
                             <?php if ($i === 0) : ?>
                                 <div class="calendar__weekday"><?= $day ?></div>
                             <?php endif; ?>
+                            
+                            
                             <div class="calendar__day"><?= $date->format(format: 'd'); ?></div>
+                            
                             <?php foreach ($eventsForDay as $event) : ?>
                                 <div class="calendar__event">
                                     <?= (new DateTime($event['debut']))->format(format: 'H:i') ?> - <a href="./reservation.php?id=<?= $event['id'];
@@ -66,6 +70,15 @@ $events = $events->getEventsBetweenByDay($start, $end);
                     </td>
                 <?php endfor; ?>
                 </tr>
+                <?php for ($hour = 8; $hour <= 19; $hour++) { ?>
+                    <tr>
+                        <td>
+                            <?= $hour;
+                            echo 'H00' ?>
+                        </td>
+                    </tr>
+                <?php }
+                ?>
                 <?php  ?>
         </table>
     </main>
