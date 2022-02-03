@@ -8,7 +8,7 @@ $events = new \Model\Events($pdo);
 $month = new Month(month: $_GET['week'] ?? null, year: $_GET['year'] ?? null);
 $start = $month->getFirstDay();
 $start = $start->format(format: 'W') === '1' ? $start : $month->getFirstDay()->modify(modifier: 'last monday');
-$weeks = 1;
+$weeks = 1; //si on met 52 par ex ça rempli le tableau
 $end = (clone $start)->modify(modifier: '+' . (6 + 7 * ($weeks - 1)) . 'weeks');
 $events = $events->getEventsBetweenByDay($start, $end);
 ?>
