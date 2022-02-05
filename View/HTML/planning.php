@@ -3,14 +3,18 @@ session_start();
 require '../../Model/bdd.php';
 require '../../Model/Month.php'; //Contient les fonctions pour faire le calendrier
 require '../../Model/events.php'; //Contient les fonctions permettant d'afficher les réservations
+
 $pdo = get_pdo();
-$sql = "SELECT reservations.id, titre, description, debut, fin, reservations.id_utilisateur, utilisateurs.id FROM `reservations` INNER JOIN utilisateurs ON reservations.id_utilisateur = utilisateurs.id  ";
+$sql = "SELECT reservations.id, titre, description, debut, fin, reservations.id_utilisateur, utilisateurs.id, utilisateurs.login FROM `reservations` INNER JOIN utilisateurs ON reservations.id_utilisateur = utilisateurs.id  ";
 $prepare = $pdo->prepare($sql);
 $prepare->execute();
 $reservations = $prepare->fetchAll(PDO::FETCH_ASSOC);
 
 $year = (isset($_GET['year'])) ? $_GET['year'] : date("Y");
 $week = (isset($_GET['week'])) ? $_GET['week'] : date('W');
+
+
+
 
 if ($week > 52) {   //52 semaines dans l'année donc après 52 passer à l'année suivante
     $year++;
@@ -45,9 +49,23 @@ if ($week > 52) {   //52 semaines dans l'année donc après 52 passer à l'anné
         <table border="1px">
             <?php
 
-            $NbrCol = array('Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche');
-            $array = count($NbrCol);
+$monday = date('d', strtotime('monday this week'));
+$tuesday = date('d', strtotime('tuesday this week'));
+$wednesday = date('d', strtotime('wednesday this week'));
+$thursday = date('d', strtotime('thursday this week'));
+$friday = date('d', strtotime('friday this week'));
+$saturday = date('d', strtotime('saturday this week'));
+$sunday = date('d', strtotime('sunday this week'));
 
+// echo "$tuesday";
+
+$NbrCol = array('Lundi', 'Mardi', 'Mercredi', 'Jeudi','Vendredi', 'Samedi','Dimanche');
+$array = array($monday, $tuesday, $wednesday, $thursday, $friday, $saturday, $sunday);
+
+
+
+            // $NbrCol = array('Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche');
+            // $array = count($NbrCol);
 
             $NbrLigne = 19; //a droite les heures
             echo '<tr>';
@@ -59,56 +77,75 @@ if ($week > 52) {   //52 semaines dans l'année donc après 52 passer à l'anné
             // -------------------------------------------------------
             // lignes suivantes
             for ($i = 8; $i <= $NbrLigne; $i++) {
+
                 // echo '<tr>';
-                for ($j = 1; $j <= $array; $j++) {
-
+            
+                for ($j = 0; $j <= isset($array[$j]); $j++) {
+    // echo $array[$j];
+                    // $weekdate = date("d", mktime(0,0,0,date("n"),date("d")-$NbrCol+$i+1,date("y")));
+                    // echo '<th id="t_head">'.$weekdate.'</th>';
                     // 1ere colonne (colonne 0)
-                    if ($j == 1) {
-
+                    if ($j == 0 ) {
 
                         echo '<td>' . $i . 'H00</td>'; //HEURES
                     }
                     // colonnes suivantes
-                    if ($i == $j) {
-                        echo '<td bgcolor="#FFCC66">';
-                    } else {
-                        echo '<td>';
-                    }
+                    // if ($i == $j) {
+                    //     echo '<td bgcolor="#FFCC66"></td>';
+                    // } else {
+                    //     echo '<td></td>';
+                    // }
+                    // echo $i;
+
+                    $resa = false;
 
                     foreach ($reservations as $reservation) {
+                        $HeureJour = $i . $j; //LIER HEURE ET JOUR DU PLANNING
+
                         list($date, $heure) = explode(' ', $reservation['debut']);  //separation de la date et de l'heure
                         // echo "$date,$heure";
 
                         list($heure_h, $heure_min, $heure_sec) = explode(':', $heure);  //on explode la variable heure pour separer l'heure, les minutes et les secondes
+                    
+                        // $heure_h = date("H", mktime($heure_h));
                         // echo "$heure_h"; //afficher heure
 
                         list($date_annee, $date_mois, $date_jour) = explode('-', $date);  //on explode la variable date pour separer l'année, le mois et le jour
                         // echo "$date_jour";  //afficher Jour
 
+                        $heureJourReserv = $heure_h . $date_jour; //LIER HEURE ET JOUR DE RESERVATION
+                        // echo "$HeureJour";
 
-                        if ($date_jour == $array && $heure_h == $i) {
-                            echo "<td>test</td>"; //PB LE ARRAY RENVOIE UN SEUL CHIFFE EX : 7 ET DAS LA BDD LE JOUR C'est 07 PEUT ETRE FAIRE UN DATETIME 
-                        }
-
-                        // echo "$i &";
-                        // echo "$heure_h &";
-
-                        // echo "$j &";
-                        // echo "$date_jour &";
-
-
-
-                        // }else{
-                        // ------------------------------------------
-                        // AFFICHAGE ligne $i, colonne $j
-                        // echo "<a href='reservation-form.php'>Réserver</a>"; //CASES RESERVER
-                        // ------------------------------------------
-                        echo '</td>';
+                        // if ($date_jour == $array && $heure_h == $i) {
+                        //     echo "<td>test</td>"; //PB LE ARRAY RENVOIE UN SEUL CHIFFE EX : 7 ET DAS LA BDD LE JOUR C'est 07 PEUT ETRE FAIRE UN DATETIME 
                         // }
+
+                        // echo $HeureJour;
+                        // echo '&'.$heureJourReserv;
+
+                        $titreResa = $reservation["titre"]; // titre de la réservation
+                        $idResa = $reservation["id"]; //id de la réservation
+                        $loginResa = $reservation['login']; // login de la reservation
+
+// echo "$HeureJour &";
+// echo "$heureJourReserv";  
                     }
+                    // echo '&'.$HeureJour;
+                    // echo '&'.$heureJourReserv;
+
+                    if ($HeureJour == $heureJourReserv) {
+                            echo "<td>$idResa";
+                            echo "$titreResa" ;
+                            echo "$loginResa" ;
+                            echo 'uuu</td>';
+                        }
+                        else {
+                            echo '<td>dispo</td>';
+                        }
                 }
+                
                 echo '</tr>';
-                echo "$array";
+                // echo "$array";
             }
             ?>
         </table>
