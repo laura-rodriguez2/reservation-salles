@@ -33,7 +33,7 @@ $events = new \Model\Events($pdo);
                     $titre = $events['titre'];
                     $contenu = $events['description'];
                 } else {
-                    die('Cet events n\'existe pas !');
+                    die('Cette réservation n\'existe pas !');
                 }
             } else {
                 die('Erreur');
