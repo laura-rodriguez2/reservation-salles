@@ -91,7 +91,7 @@ if ($week > 52) {   //52 semaines dans l'année donc après 52 passer à l'anné
                     }
 
                     if ($HeureJour == $heureJourReserv) { //Affichage des réservations
-                        echo "<td class='lien_reservation'><a  href='reservation.php?id=$idReservation'>";
+                        echo "<td><a class='lien_reservation' href='reservation.php?id=$idReservation'>";
                         echo "$titreReservation </a><br>";
                         echo "De : $loginReservation <br>";
                         echo '</td>';
