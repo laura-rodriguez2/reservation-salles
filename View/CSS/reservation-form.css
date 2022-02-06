@@ -1,25 +1,24 @@
 header{
-    position: absolute;
-    width: 100%;
+
     }
 body {
     background-image: url(../MEDIAS/triangle.jpg);
     background-repeat: no-repeat;   
     background-size:cover;
     background-position-x: center;
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
 }
 main{
-    color: white;
-    margin: 6%;
+    background-color: rgba(0, 0, 0, 0.582);
+    color:blanchedalmond;
+    margin: 5%;
     padding: 2%;
     display: flex;
     justify-content: center;
-    background-color: rgb(24, 24, 24,.8);
 }
 
 main h1{
-    color: grey;
+    color:rgba(255, 235, 205, 0.774);
 }
 
 main input{
@@ -28,7 +27,6 @@ margin: 2%;
 }
 footer{
     /* position: fixed; */
-    position:absolute;
-    bottom:0;
-    width: 100%;
+
+
 }
