@@ -1,9 +1,12 @@
 header{
-    position: absolute;
-    width: 100%;
+
 }
 body{
     background-image: url(../MEDIAS/fondcercle.jpg);
+    background-repeat: no-repeat;   
+    background-size:cover;
+    background-position-x: center;
+    background-attachment: fixed;
 }
 main{
 background-color: rgba(0, 0, 0, 0.582);
@@ -24,8 +27,5 @@ justify-content: center;
     margin-bottom: 6%;
 }
 footer{
-    /* position: fixed; */
-    position:absolute;
-    bottom:0;
-    width: 100%;
+
 }

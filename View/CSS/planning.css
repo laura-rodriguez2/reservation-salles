@@ -4,6 +4,10 @@ header{
 }
 body {
     background-image: url(../MEDIAS/triangle.jpg);
+    background-repeat: no-repeat;   
+    background-size:cover;
+    background-position-x: center;
+    /* background-attachment: fixed; */
 }
 
 main {
@@ -17,7 +21,6 @@ main {
 table{
     width: 100%;
     height: calc(80vh - 110px);
-    padding: 10%;
     background-color: rgb(24, 24, 24,.8);
 }
 
