@@ -16,7 +16,7 @@ require('../../Model/bdd.php');
             <a href="index.php"><img src="../MEDIAS/vr_universe.png" href="./index.php"width="15%"></a>
             <a class="al_header_color" href="index.php">Accueil</a>
             <a class="al_header_color" href="planning.php">Planning</a>
-            <a class="al_header_color" href="reservation-form.php">Réservation</a>
+            <a class="al_header_color" href="reservation-form.php">Réserver</a>
             <a class="al_header_color" href="profil.php">Profil</a>
             <a class="al_header_color" href="deconnexion.php">Déconnexion</a>
         <?php

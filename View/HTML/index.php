@@ -18,19 +18,10 @@ session_start();
             ?>
         </header>
         <main>
-            <div class="al_scroll-snap">
                 <div class="al_bloc">
                     <img class="image" src="../MEDIAS/fond1-2.0.png">
                 </div>
-                <div class="al_bloc">
-                    <p>reserver ue salle pour nimporte quel evenements
-                    particulier voici la liste des meilleurs jeux 
-                    que nous pouvons vous proposer:</p> </br>
-                    <ul>
-                        <li>arizona sunshin</li>
-                        <li>drive club vr</li>
-                    </ul>
-                </div>
+            
         </main>
         <footer>
             <?php 

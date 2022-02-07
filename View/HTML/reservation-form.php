@@ -1,7 +1,8 @@
 <?php
 session_start();
 require '../../Model/bdd.php';
-require '../../Model/reservations.php';
+$pdo = get_pdo();
+
 if (isset($_POST['reserver'])) {
     if (strlen(htmlspecialchars($_POST['titre'])) >= 2) {
         if (strlen(htmlspecialchars($_POST['desc'])) >= 4) {
@@ -14,7 +15,6 @@ if (isset($_POST['reserver'])) {
                 $datedebut = implode(" ", $array);
                 $array = array($_POST['date-fin'], $_POST['date-fin-heure']);
                 $datefin = implode(" ", $array);
-                $pdo = new PDO('mysql:host=localhost;dbname=reservationsalles', 'root', '');
                 $stmt = $pdo->prepare("INSERT INTO reservations (titre,description,debut,fin,id_utilisateur) VALUES ('$titre','$desc','$datedebut','$datefin','$userid')");
                 $stmt->execute();
                 header("location: planning.php");
@@ -50,6 +50,7 @@ if (isset($_POST['reserver'])) {
                 <input type="text" name="titre"><br />
                 <label for="desc">Description:</label><br />
                 <textarea name="desc" rows="4" cols="40" minlenght="10"></textarea><br />
+                <p>Veuillez réserver de 1 heure en 1 heure</p>
                 <label for="date-debut">Date de début:</label><br />
                 <input class="date" type="date" name="date-debut">
                 <input class="date" type="time" name="date-debut-heure" min="08:00" max="19:00" required><br />

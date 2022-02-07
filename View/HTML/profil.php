@@ -1,15 +1,16 @@
 <?php
 session_start();
 require('../../Model/bdd.php');
-$bdd = new PDO('mysql:host=localhost;dbname=reservationsalles', 'root', '');
+$pdo = get_pdo();
+
 if (isset($_SESSION['id']) && $_SESSION['id'] > 0) {
-    $requtilisateur = $bdd->prepare('SELECT * FROM utilisateurs WHERE id = ?');
+    $requtilisateur = $pdo->prepare('SELECT * FROM utilisateurs WHERE id = ?');
     $requtilisateur->execute(array($_SESSION['id']));
     $infoutilisateur = $requtilisateur->fetch();
 
     if (isset($_POST['newlogin']) && !empty($_POST['newlogin']) && $_POST['newlogin'] != $infoutilisateur['login']) {
         $login = $_POST['newlogin'];
-        $requetelogin = $bdd->prepare("SELECT * FROM utilisateurs WHERE login = ?");
+        $requetelogin = $pdo->prepare("SELECT * FROM utilisateurs WHERE login = ?");
         $requetelogin->execute(array($login));
         $loginexist = $requetelogin->rowCount();
 
@@ -17,7 +18,7 @@ if (isset($_SESSION['id']) && $_SESSION['id'] > 0) {
             $msg = "Le login existe déjà !";
         } else {
             $newlogin = htmlspecialchars($_POST['newlogin']);
-            $insertlogin = $bdd->prepare("UPDATE utilisateurs SET login = ? WHERE id = ?");
+            $insertlogin = $pdo->prepare("UPDATE utilisateurs SET login = ? WHERE id = ?");
             $insertlogin->execute(array($newlogin, $_SESSION['id']));
             $_SESSION['login'] = $newlogin;
             header('Location: profil.php');
@@ -30,7 +31,7 @@ if (isset($_POST['newmdp']) && !empty($_POST['newmdp']) && isset($_POST['newmdp2
 
     if ($mdp1 == $mdp2) {
         $hachage = password_hash($mdp1, PASSWORD_BCRYPT);
-        $insertmdp = $bdd->prepare("UPDATE utilisateurs SET password = ? WHERE id = ?");
+        $insertmdp = $pdo->prepare("UPDATE utilisateurs SET password = ? WHERE id = ?");
         $insertmdp->execute(array($hachage, $_SESSION['id']));
         header('Location: profil.php');
     } else {
