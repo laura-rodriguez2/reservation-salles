@@ -1,8 +1,8 @@
 <?php
 session_start();
 require '../../Model/bdd.php';
-require '../../Model/reservations.php';
 $pdo = get_pdo();
+
 if (isset($_POST['reserver'])) {
     if (strlen(htmlspecialchars($_POST['titre'])) >= 2) {
         if (strlen(htmlspecialchars($_POST['desc'])) >= 4) {
@@ -11,29 +11,10 @@ if (isset($_POST['reserver'])) {
                 $userid = $_SESSION['id'];
                 $titre = htmlspecialchars($_POST['titre']);
                 $desc = htmlspecialchars($_POST['desc']);
-                
                 $array = array($_POST['date-debut'], $_POST['date-debut-heure']);
                 $datedebut = implode(" ", $array);
-
-                // $heurefin = ($_POST['date-debut-heure']);
-                // date('H:i:s',(strtotime ( '+1 H' , strtotime ( $heurefin) ) ));
-
-                // $heurefin = new DateTime($_POST['date-debut-heure']); // For today/now, don't pass an arg.
-                // $heurefin->modify("+1 day");
-                
-                $timestamp = strtotime($_POST['date-debut-heure']) + 60*60;
-                $heurefin = date('H:i', $timestamp);
-
-                $timestamp1 = strtotime($_POST['date-debut']);
-                $heurefin1 = date('H:i', $timestamp1);
-
-                // echo $heurefin;//11:09
-
-
-                $array = array($heurefin1, $heurefin);
+                $array = array($_POST['date-fin'], $_POST['date-fin-heure']);
                 $datefin = implode(" ", $array);
-                var_dump($datefin);
-
                 $stmt = $pdo->prepare("INSERT INTO reservations (titre,description,debut,fin,id_utilisateur) VALUES ('$titre','$desc','$datedebut','$datefin','$userid')");
                 $stmt->execute();
                 header("location: planning.php");
@@ -61,10 +42,7 @@ if (isset($_POST['reserver'])) {
     </header>
     <main>
         <?php
-        if ($_SESSION == true) { 
-            echo $timestamp;
-            echo ($_POST['date-debut-heure']);
-            ?>
+        if ($_SESSION == true) { ?>
 
             <form action="reservation-form.php" method="POST">
                 <h1>Réserver une salle</h1>
@@ -76,10 +54,9 @@ if (isset($_POST['reserver'])) {
                 <label for="date-debut">Date de début:</label><br />
                 <input class="date" type="date" name="date-debut">
                 <input class="date" type="time" name="date-debut-heure" min="08:00" max="19:00" required><br />
-                <!-- <label for="date-fin">Date de fin:</label><br />
+                <label for="date-fin">Date de fin:</label><br />
                 <input class="date" type="date" name="date-fin">
-                <input class="date" type="time" name="date-fin-heure" min="08:00" max="19:00" required><br /> -->
-                <!-- <p>Votre réservation vous donne accès à une salle privé, veuillez arriver  5minutes avant l'heure de début ! </p> -->
+                <input class="date" type="time" name="date-fin-heure" min="08:00" max="19:00" required><br />
                 <input class="btn btn-info" type="submit" name="reserver" value="Réserver">
             </form>
 
