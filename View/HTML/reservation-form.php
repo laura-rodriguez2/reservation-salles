@@ -29,6 +29,7 @@ if (isset($_POST['reserver'])) {
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href='../CSS/reservation-form.css' />
+    <link rel="icon" href="../MEDIAS/vr_universe_icon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Réservation</title>
 </head>
@@ -41,38 +42,35 @@ if (isset($_POST['reserver'])) {
     </header>
     <main>
         <?php
-    if ($_SESSION == true){ ?>
-        <div>
-            <section>
-                <form action="reservation-form.php" method="POST">
-                    <h1>Réserver une salle</h1>
-                    <label for="titre">Titre:</label><br />
-                    <input type="text" name="titre"><br />
-                    <label for="desc">Description:</label><br />
-                    <textarea name="desc" rows="4" cols="40" minlenght="10"></textarea><br />
-                    <label for="date-debut">Date de début:</label><br />
-                    <input class="date" type="date" name="date-debut">
-                    <input class="date" type="time" name="date-debut-heure" min="08:00" max="19:00" required><br />
-                    <label for="date-fin">Date de fin:</label><br />
-                    <input class="date" type="date" name="date-fin">
-                    <input class="date" type="time" name="date-fin-heure" min="08:00" max="19:00" required><br />
-                    <input class="btn btn-info" type="submit" name="reserver" value="Réserver">
-                </form>
-        </div>
-        </section>
+        if ($_SESSION == true) { ?>
+
+            <form action="reservation-form.php" method="POST">
+                <h1>Réserver une salle</h1>
+                <label for="titre">Titre:</label><br />
+                <input type="text" name="titre"><br />
+                <label for="desc">Description:</label><br />
+                <textarea name="desc" rows="4" cols="40" minlenght="10"></textarea><br />
+                <label for="date-debut">Date de début:</label><br />
+                <input class="date" type="date" name="date-debut">
+                <input class="date" type="time" name="date-debut-heure" min="08:00" max="19:00" required><br />
+                <label for="date-fin">Date de fin:</label><br />
+                <input class="date" type="date" name="date-fin">
+                <input class="date" type="time" name="date-fin-heure" min="08:00" max="19:00" required><br />
+                <input class="btn btn-info" type="submit" name="reserver" value="Réserver">
+            </form>
+
     </main>
+<?php
+        } else {
+            echo "Vous devez être connecté pour reserver !";
+            echo "<a href='connexion.php'>Connexion</a>";
+        }
+?>
+<footer>
     <?php
-    }
-    else {
-    echo "Vous devez être connecté pour reserver !";
-    echo "<a href='connexion.php'>Connexion</a>";
-    }
+    require_once('header_footer/footer.php');
     ?>
-    <footer>
-        <?php
-        require_once('header_footer/footer.php');
-        ?>
-    </footer>
+</footer>
 
 </html>
 </body>

@@ -15,7 +15,7 @@ class Month{
     public function __construct(?int $month = null, ?int $year = null)
     {
         if($month === null){
-            $month = intval(date(format: 'N'));
+            $month = intval(date(format: 'd'));
         }
         if($year === null){
             $year = intval(date(format: 'Y'));

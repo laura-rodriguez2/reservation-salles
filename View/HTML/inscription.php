@@ -17,7 +17,8 @@ if (isset($_POST['submit'])){
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href='../CSS/inscription.css' />
+    <link rel="stylesheet" href='../CSS/inscription.css'/>
+    <link rel="icon" href="../MEDIAS/vr_universe_icon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Inscription</title>
 </head>
@@ -35,8 +36,8 @@ if (isset($_POST['submit'])){
                         <input class="box-input" type="text" name="login" placeholder="Login" required />
                         <input class="box-input" type="password" name="password" placeholder="Mot de passe" required />
                         <input class="text" type="password" name="password2" placeholder="Confirmation du mot de passe" required="">
-                        <input class="btn btn-secondary btn-lg" type="submit" name="submit" value="S'inscrire" /> 
-                        <p class="lr_h2">Déjà inscrit ? <a id="color_link" href="connexion.php">Connectez-vous ici</a></p> 
+                        <input class="btn btn-info btn-lg" type="submit" name="submit" value="S'inscrire" /> 
+                        <p class="lr_h2">Déjà inscrit ? <a class="lien_connexion" href="connexion.php">Connectez-vous ici</a></p> 
                 </form>
             </div>
     </main>
